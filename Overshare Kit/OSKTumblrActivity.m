@@ -113,6 +113,11 @@ static NSInteger OSKTumblrActivity_MaxImageCount = 0;
 - (void)performActivity:(OSKActivityCompletionHandler)completion {
     __weak OSKTumblrActivity *weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        UIBackgroundTaskIdentifier backgroundTaskIdentifier = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+            if (completion) {
+                completion(weakSelf, NO, nil);
+            }
+        }];
         [OSKTumblrUtility postContentItem:(OSKBlogPostContentItem *)weakSelf.contentItem
                            withCredential:weakSelf.activeManagedAccount.credential
                             appCredential:[weakSelf.class applicationCredential]
@@ -123,6 +128,7 @@ static NSInteger OSKTumblrActivity_MaxImageCount = 0;
                                    if (completion) {
                                        completion(weakSelf, success, error);
                                    }
+                                   [[UIApplication sharedApplication] endBackgroundTask:backgroundTaskIdentifier];
                                }];
     });
 }
