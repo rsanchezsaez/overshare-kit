@@ -125,6 +125,10 @@
 		BC7778F2195B0DB1008867B9 /* OSKTumblrUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = BC7778EA195B0DB1008867B9 /* OSKTumblrUtility.m */; };
 		BC7778F3195B0DB1008867B9 /* OSKUITextViewSubstitute.m in Sources */ = {isa = PBXBuildFile; fileRef = BC7778EC195B0DB1008867B9 /* OSKUITextViewSubstitute.m */; };
 		BC7778F4195B0DB1008867B9 /* OSKWebPageTitleUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = BC7778EE195B0DB1008867B9 /* OSKWebPageTitleUtility.m */; };
+		BC8BC16C195B3D4F00D0547F /* OSKSinaWeiboActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = BC8BC165195B3D4F00D0547F /* OSKSinaWeiboActivity.m */; };
+		BC8BC16D195B3D4F00D0547F /* OSKSinaWeiboUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = BC8BC167195B3D4F00D0547F /* OSKSinaWeiboUtility.m */; };
+		BC8BC16E195B3D4F00D0547F /* OSKTencentWeiboActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = BC8BC169195B3D4F00D0547F /* OSKTencentWeiboActivity.m */; };
+		BC8BC16F195B3D4F00D0547F /* OSKTencentWeiboUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = BC8BC16B195B3D4F00D0547F /* OSKTencentWeiboUtility.m */; };
 		BCD528D11959F0A6004ED76F /* OSKTumblrAuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCD528CD1959F0A6004ED76F /* OSKTumblrAuthenticationViewController.m */; };
 		BCD528D21959F0A6004ED76F /* OSKTumblrActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = BCD528CF1959F0A6004ED76F /* OSKTumblrActivity.m */; };
 /* End PBXBuildFile section */
@@ -515,6 +519,14 @@
 		BC7778EC195B0DB1008867B9 /* OSKUITextViewSubstitute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSKUITextViewSubstitute.m; sourceTree = "<group>"; };
 		BC7778ED195B0DB1008867B9 /* OSKWebPageTitleUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSKWebPageTitleUtility.h; sourceTree = "<group>"; };
 		BC7778EE195B0DB1008867B9 /* OSKWebPageTitleUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSKWebPageTitleUtility.m; sourceTree = "<group>"; };
+		BC8BC164195B3D4F00D0547F /* OSKSinaWeiboActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSKSinaWeiboActivity.h; sourceTree = "<group>"; };
+		BC8BC165195B3D4F00D0547F /* OSKSinaWeiboActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSKSinaWeiboActivity.m; sourceTree = "<group>"; };
+		BC8BC166195B3D4F00D0547F /* OSKSinaWeiboUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSKSinaWeiboUtility.h; sourceTree = "<group>"; };
+		BC8BC167195B3D4F00D0547F /* OSKSinaWeiboUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSKSinaWeiboUtility.m; sourceTree = "<group>"; };
+		BC8BC168195B3D4F00D0547F /* OSKTencentWeiboActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSKTencentWeiboActivity.h; sourceTree = "<group>"; };
+		BC8BC169195B3D4F00D0547F /* OSKTencentWeiboActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSKTencentWeiboActivity.m; sourceTree = "<group>"; };
+		BC8BC16A195B3D4F00D0547F /* OSKTencentWeiboUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSKTencentWeiboUtility.h; sourceTree = "<group>"; };
+		BC8BC16B195B3D4F00D0547F /* OSKTencentWeiboUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSKTencentWeiboUtility.m; sourceTree = "<group>"; };
 		BCD528C41959EBD6004ED76F /* osk-tumblrIcon-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "osk-tumblrIcon-29.png"; sourceTree = "<group>"; };
 		BCD528C51959EBD6004ED76F /* osk-tumblrIcon-29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "osk-tumblrIcon-29@2x.png"; sourceTree = "<group>"; };
 		BCD528C61959EBD6004ED76F /* osk-tumblrIcon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "osk-tumblrIcon-60@2x.png"; sourceTree = "<group>"; };
@@ -653,6 +665,14 @@
 		7FEE77DC181ED8FE000F684A /* Overshare Kit */ = {
 			isa = PBXGroup;
 			children = (
+				BC8BC164195B3D4F00D0547F /* OSKSinaWeiboActivity.h */,
+				BC8BC165195B3D4F00D0547F /* OSKSinaWeiboActivity.m */,
+				BC8BC166195B3D4F00D0547F /* OSKSinaWeiboUtility.h */,
+				BC8BC167195B3D4F00D0547F /* OSKSinaWeiboUtility.m */,
+				BC8BC168195B3D4F00D0547F /* OSKTencentWeiboActivity.h */,
+				BC8BC169195B3D4F00D0547F /* OSKTencentWeiboActivity.m */,
+				BC8BC16A195B3D4F00D0547F /* OSKTencentWeiboUtility.h */,
+				BC8BC16B195B3D4F00D0547F /* OSKTencentWeiboUtility.m */,
 				BC7778E1195B0DB1008867B9 /* OSKFacebookSharing.h */,
 				BC7778E2195B0DB1008867B9 /* OSKGooglePlusActivity.h */,
 				BC7778E3195B0DB1008867B9 /* OSKGooglePlusActivity.m */,
@@ -1100,7 +1120,9 @@
 				7FEE78EE181ED8FE000F684A /* OSKSystemAccountStore.m in Sources */,
 				7FEE78C9181ED8FE000F684A /* OSKAppDotNetAuthenticationViewController.m in Sources */,
 				7FEE78C3181ED8FE000F684A /* OSKActivitySheetViewController.m in Sources */,
+				BC8BC16D195B3D4F00D0547F /* OSKSinaWeiboUtility.m in Sources */,
 				7FEE78ED181ED8FE000F684A /* OSKSMSActivity.m in Sources */,
+				BC8BC16E195B3D4F00D0547F /* OSKTencentWeiboActivity.m in Sources */,
 				7F55A30F18425C6C004A3BCC /* OSKSessionController.m in Sources */,
 				7FEE78FA181ED8FE000F684A /* UIView+OSKUtilities.m in Sources */,
 				BC7778F2195B0DB1008867B9 /* OSKTumblrUtility.m in Sources */,
@@ -1120,6 +1142,7 @@
 				7F04946C188AFE5400BE7C4E /* NSString+OSKEmoji.m in Sources */,
 				7FEE78B8181ED8FE000F684A /* OSK1PasswordBrowserActivity.m in Sources */,
 				7FEE78E3181ED8FE000F684A /* OSKPinboardActivity.m in Sources */,
+				BC8BC16C195B3D4F00D0547F /* OSKSinaWeiboActivity.m in Sources */,
 				7FEE78F8181ED8FE000F684A /* UIColor+OSKUtility.m in Sources */,
 				7FEE78DF181ED8FE000F684A /* OSKNavigationController.m in Sources */,
 				7FEE78D5181ED8FE000F684A /* OSKInMemoryImageCache.m in Sources */,
@@ -1152,6 +1175,7 @@
 				7FB34FEB1895ADBE0081C91A /* OSKSmartPunctuation.m in Sources */,
 				7FEE78D8181ED8FE000F684A /* OSKKeychainUtility.m in Sources */,
 				7FEE78F1181ED8FE000F684A /* OSKTwitterActivity.m in Sources */,
+				BC8BC16F195B3D4F00D0547F /* OSKTencentWeiboUtility.m in Sources */,
 				7FEE78E8181ED8FE000F684A /* OSKReadabilityUtility.m in Sources */,
 				7FEE78EB181ED8FE000F684A /* OSKShareableContent.m in Sources */,
 				7FEE78BF181ED8FE000F684A /* OSKActivityCollectionViewController.m in Sources */,

@@ -16,6 +16,8 @@
 #import "OSKActivity_GenericAuthentication.h"
 #import "OSKActivity_ManagedAccounts.h"
 #import "OSKActivitySheetViewController.h"
+#import "OSKApplicationCredential.h"
+#import "OSKTencentWeiboActivity.h"
 #import "OSKAppDotNetActivity.h"
 #import "OSKAuthenticationViewController.h"
 #import "OSKLogger.h"
@@ -124,7 +126,14 @@
         else {
             __weak OSKSessionController *weakSelf = self;
             NSString *systemAccountTypeIdentifier = [theActivity.class systemAccountTypeIdentifier];
-            [accountStore requestAccessToAccountsWithAccountTypeIdentifier:systemAccountTypeIdentifier options:nil completion:^(BOOL successful, NSError *error) {
+            
+            NSDictionary *options = nil;
+            if ([[[activity class] activityType] isEqualToString:OSKActivityType_iOS_TencentWeibo])
+            {
+                options = @{ ACTencentWeiboAppIdKey : [activity.class applicationCredential].applicationKey };
+            }
+            
+            [accountStore requestAccessToAccountsWithAccountTypeIdentifier:systemAccountTypeIdentifier options:options completion:^(BOOL successful, NSError *error) {
                 if (successful) {
                     NSArray *systemAccounts = [accountStore accountsForAccountTypeIdentifier:systemAccountTypeIdentifier];
                     if (systemAccounts.count > 0) {

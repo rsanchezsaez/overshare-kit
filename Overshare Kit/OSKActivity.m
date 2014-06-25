@@ -19,6 +19,8 @@ NSString * const OSKActivityOption_RequireOperations = @"OSKActivityOption_Requi
 // ACTIVITY TYPES
 NSString * const OSKActivityType_iOS_Twitter = @"OSKActivityType_iOS_Twitter";
 NSString * const OSKActivityType_iOS_Facebook = @"OSKActivityType_iOS_Facebook";
+NSString * const OSKActivityType_iOS_SinaWeibo = @"OSKActivityType_iOS_SinaWeibo";
+NSString * const OSKActivityType_iOS_TencentWeibo = @"OSKActivityType_iOS_TencentWeibo";
 NSString * const OSKActivityType_iOS_Safari = @"OSKActivityType_iOS_Safari";
 NSString * const OSKActivityType_iOS_SMS = @"OSKActivityType_iOS_SMS";
 NSString * const OSKActivityType_iOS_Email = @"OSKActivityType_iOS_Email";

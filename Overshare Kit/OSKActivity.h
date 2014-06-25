@@ -17,6 +17,8 @@ extern NSString * const OSKActivityOption_RequireOperations; // Passing @(YES) f
 // BUILT-IN ACTIVITY TYPES (Your custom OSKActivity subclasses should have their own unique types.)
 extern NSString * const OSKActivityType_iOS_Twitter;
 extern NSString * const OSKActivityType_iOS_Facebook;
+extern NSString * const OSKActivityType_iOS_SinaWeibo;
+extern NSString * const OSKActivityType_iOS_TencentWeibo;
 extern NSString * const OSKActivityType_iOS_Safari;
 extern NSString * const OSKActivityType_iOS_SMS;
 extern NSString * const OSKActivityType_iOS_Email;

@@ -39,6 +39,8 @@
 #import "OSKSMSActivity.h"
 #import "OSKThingsActivity.h"
 #import "OSKTwitterActivity.h"
+#import "OSKSinaWeiboActivity.h"
+#import "OSKTencentWeiboActivity.h"
 
 #if DEBUG == 1
 // DEVELOPMENT KEYS ONLY, YOUR APP SHOULD SUPPLY YOUR APP CREDENTIALS VIA THE CUSTOMIZATIONS DELEGATE.
@@ -51,6 +53,8 @@ static NSString * OSKApplicationCredential_Facebook_Key = @"554155471323751";
 static NSString * OSKApplicationCredential_GooglePlus_Key = @"810720596839-qccfsg2b2ljn0cnu76rha48f5dguns3j.apps.googleusercontent.com";
 static NSString * OSKApplicationCredential_Tumblr_Key = @"ClA5jd4kxI51UZL4tdUP8ZtCsO8qvoIHZ1XdJC0GoEVmLcPevO";
 static NSString * OSKApplicationCredential_Tumblr_Secret = @"bs6DLGe9A1W5BmT8FnVbXVjtCFI5F4fNwCBfm6tYj51RnN5UUN";
+#warning No sample Tencent Weibo app credential provided
+static NSString * OSKApplicationCredential_TencentWeibo_Key = @"";
 #endif
 
 NSString * const OSKActivitiesManagerDidMarkActivityTypesAsPurchasedNotification = @"OSKActivitiesManagerDidMarkActivityTypesAsPurchasedNotification";
@@ -301,7 +305,21 @@ static NSString * OSKActivitiesManagerPersistentExclusionsKey = @"OSKActivitiesM
                                        requireOperations:requireOperations
                                                     item:item];
     if (twitter) { [activities addObject:twitter]; }
-    
+
+    OSKSinaWeiboActivity *sinaWeibo = [self validActivityForType:[OSKSinaWeiboActivity activityType]
+                                                         class:[OSKSinaWeiboActivity class]
+                                                 excludedTypes:excludedActivityTypes
+                                             requireOperations:requireOperations
+                                                          item:item];
+    if (sinaWeibo) { [activities addObject:sinaWeibo]; }
+
+    OSKTencentWeiboActivity *tencentWeibo = [self validActivityForType:[OSKTencentWeiboActivity activityType]
+                                                              class:[OSKTencentWeiboActivity class]
+                                                      excludedTypes:excludedActivityTypes
+                                                  requireOperations:requireOperations
+                                                               item:item];
+    if (tencentWeibo) { [activities addObject:tencentWeibo]; }
+
     OSKAppDotNetActivity *appDotNet = [self validActivityForType:[OSKAppDotNetActivity activityType]
                                                        class:[OSKAppDotNetActivity class]
                                                excludedTypes:excludedActivityTypes
@@ -692,6 +710,12 @@ static NSString * OSKActivitiesManagerPersistentExclusionsKey = @"OSKActivitiesM
             appCredential = [[OSKApplicationCredential alloc]
                              initWithOvershareApplicationKey:OSKApplicationCredential_Tumblr_Key
                              applicationSecret:OSKApplicationCredential_Tumblr_Secret
+                             appName:@"Overshare"];
+        }
+        else if ([activityType isEqualToString:OSKActivityType_iOS_TencentWeibo]) {
+            appCredential = [[OSKApplicationCredential alloc]
+                             initWithOvershareApplicationKey:OSKApplicationCredential_TencentWeibo_Key
+                             applicationSecret:nil
                              appName:@"Overshare"];
         }
     }
