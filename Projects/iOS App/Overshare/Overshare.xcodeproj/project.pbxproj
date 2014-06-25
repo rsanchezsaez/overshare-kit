@@ -409,6 +409,16 @@
 		BC8BC15F195B3CCA00D0547F /* Things-Icon-76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC8BC0CA195B3CCA00D0547F /* Things-Icon-76@2x.png */; };
 		BC8BC160195B3CCA00D0547F /* OSKSinaWeiboUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = BC8BC0CC195B3CCA00D0547F /* OSKSinaWeiboUtility.m */; };
 		BC8BC163195B3D3800D0547F /* OSKTencentWeiboUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = BC8BC162195B3D3800D0547F /* OSKTencentWeiboUtility.m */; };
+		BC8BC175195B863E00D0547F /* osk-tencentWeiboIcon-29.png in Resources */ = {isa = PBXBuildFile; fileRef = BC8BC170195B863E00D0547F /* osk-tencentWeiboIcon-29.png */; };
+		BC8BC176195B863E00D0547F /* osk-tencentWeiboIcon-29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC8BC171195B863E00D0547F /* osk-tencentWeiboIcon-29@2x.png */; };
+		BC8BC177195B863E00D0547F /* osk-tencentWeiboIcon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC8BC172195B863E00D0547F /* osk-tencentWeiboIcon-60@2x.png */; };
+		BC8BC178195B863E00D0547F /* osk-tencentWeiboIcon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = BC8BC173195B863E00D0547F /* osk-tencentWeiboIcon-76.png */; };
+		BC8BC179195B863E00D0547F /* osk-tencentWeiboIcon-76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC8BC174195B863E00D0547F /* osk-tencentWeiboIcon-76@2x.png */; };
+		BC8BC17F195B898800D0547F /* osk-sinaWeiboIcon-29.png in Resources */ = {isa = PBXBuildFile; fileRef = BC8BC17A195B898800D0547F /* osk-sinaWeiboIcon-29.png */; };
+		BC8BC180195B898800D0547F /* osk-sinaWeiboIcon-29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC8BC17B195B898800D0547F /* osk-sinaWeiboIcon-29@2x.png */; };
+		BC8BC181195B898800D0547F /* osk-sinaWeiboIcon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC8BC17C195B898800D0547F /* osk-sinaWeiboIcon-60@2x.png */; };
+		BC8BC182195B898800D0547F /* osk-sinaWeiboIcon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = BC8BC17D195B898800D0547F /* osk-sinaWeiboIcon-76.png */; };
+		BC8BC183195B898800D0547F /* osk-sinaWeiboIcon-76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC8BC17E195B898800D0547F /* osk-sinaWeiboIcon-76@2x.png */; };
 		BCD528B919597FFE004ED76F /* OSKTumblrActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = BCD528B819597FFE004ED76F /* OSKTumblrActivity.m */; };
 		BCD528BF1959D7CD004ED76F /* osk-tumblrIcon-29.png in Resources */ = {isa = PBXBuildFile; fileRef = BCD528BA1959D7CD004ED76F /* osk-tumblrIcon-29.png */; };
 		BCD528C01959D7CD004ED76F /* osk-tumblrIcon-29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BCD528BB1959D7CD004ED76F /* osk-tumblrIcon-29@2x.png */; };
@@ -990,6 +1000,16 @@
 		BC8BC0CC195B3CCA00D0547F /* OSKSinaWeiboUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSKSinaWeiboUtility.m; sourceTree = "<group>"; };
 		BC8BC161195B3D3800D0547F /* OSKTencentWeiboUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSKTencentWeiboUtility.h; sourceTree = "<group>"; };
 		BC8BC162195B3D3800D0547F /* OSKTencentWeiboUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSKTencentWeiboUtility.m; sourceTree = "<group>"; };
+		BC8BC170195B863E00D0547F /* osk-tencentWeiboIcon-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "osk-tencentWeiboIcon-29.png"; sourceTree = "<group>"; };
+		BC8BC171195B863E00D0547F /* osk-tencentWeiboIcon-29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "osk-tencentWeiboIcon-29@2x.png"; sourceTree = "<group>"; };
+		BC8BC172195B863E00D0547F /* osk-tencentWeiboIcon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "osk-tencentWeiboIcon-60@2x.png"; sourceTree = "<group>"; };
+		BC8BC173195B863E00D0547F /* osk-tencentWeiboIcon-76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "osk-tencentWeiboIcon-76.png"; sourceTree = "<group>"; };
+		BC8BC174195B863E00D0547F /* osk-tencentWeiboIcon-76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "osk-tencentWeiboIcon-76@2x.png"; sourceTree = "<group>"; };
+		BC8BC17A195B898800D0547F /* osk-sinaWeiboIcon-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "osk-sinaWeiboIcon-29.png"; sourceTree = "<group>"; };
+		BC8BC17B195B898800D0547F /* osk-sinaWeiboIcon-29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "osk-sinaWeiboIcon-29@2x.png"; sourceTree = "<group>"; };
+		BC8BC17C195B898800D0547F /* osk-sinaWeiboIcon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "osk-sinaWeiboIcon-60@2x.png"; sourceTree = "<group>"; };
+		BC8BC17D195B898800D0547F /* osk-sinaWeiboIcon-76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "osk-sinaWeiboIcon-76.png"; sourceTree = "<group>"; };
+		BC8BC17E195B898800D0547F /* osk-sinaWeiboIcon-76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "osk-sinaWeiboIcon-76@2x.png"; sourceTree = "<group>"; };
 		BCD528B719597FFE004ED76F /* OSKTumblrActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSKTumblrActivity.h; sourceTree = "<group>"; };
 		BCD528B819597FFE004ED76F /* OSKTumblrActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSKTumblrActivity.m; sourceTree = "<group>"; };
 		BCD528BA1959D7CD004ED76F /* osk-tumblrIcon-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "osk-tumblrIcon-29.png"; sourceTree = "<group>"; };
@@ -1251,6 +1271,16 @@
 		7FEE7694181ED8EE000F684A /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				BC8BC17A195B898800D0547F /* osk-sinaWeiboIcon-29.png */,
+				BC8BC17B195B898800D0547F /* osk-sinaWeiboIcon-29@2x.png */,
+				BC8BC17C195B898800D0547F /* osk-sinaWeiboIcon-60@2x.png */,
+				BC8BC17D195B898800D0547F /* osk-sinaWeiboIcon-76.png */,
+				BC8BC17E195B898800D0547F /* osk-sinaWeiboIcon-76@2x.png */,
+				BC8BC170195B863E00D0547F /* osk-tencentWeiboIcon-29.png */,
+				BC8BC171195B863E00D0547F /* osk-tencentWeiboIcon-29@2x.png */,
+				BC8BC172195B863E00D0547F /* osk-tencentWeiboIcon-60@2x.png */,
+				BC8BC173195B863E00D0547F /* osk-tencentWeiboIcon-76.png */,
+				BC8BC174195B863E00D0547F /* osk-tencentWeiboIcon-76@2x.png */,
 				BCD528BA1959D7CD004ED76F /* osk-tumblrIcon-29.png */,
 				BCD528BB1959D7CD004ED76F /* osk-tumblrIcon-29@2x.png */,
 				BCD528BC1959D7CD004ED76F /* osk-tumblrIcon-60@2x.png */,
@@ -2379,9 +2409,11 @@
 				7FEE777E181ED8EF000F684A /* osk-pinboardIcon-60@2x.png in Resources */,
 				BC8BC11E195B3CCA00D0547F /* osk-mailIcon-76@2x.png in Resources */,
 				BC8BC110195B3CCA00D0547F /* osk-iap-badge-76.png in Resources */,
+				BC8BC175195B863E00D0547F /* osk-tencentWeiboIcon-29.png in Resources */,
 				BC8BC14F195B3CCA00D0547F /* Pocket-Icon-60@2x.png in Resources */,
 				BC8BC136195B3CCA00D0547F /* osk-readabilityIcon-60@2x.png in Resources */,
 				7FEE7787181ED8EF000F684A /* Riposte-Icon-76@2x.png in Resources */,
+				BC8BC180195B898800D0547F /* osk-sinaWeiboIcon-29@2x.png in Resources */,
 				7FE4672E1821E9650054D2BC /* osk-copyIcon-yellow-76@2x.png in Resources */,
 				BC8BC14B195B3CCA00D0547F /* osk_linkPlaceholder_phone.png in Resources */,
 				7FE4672A1821E9650054D2BC /* osk-copyIcon-purple-76.png in Resources */,
@@ -2400,6 +2432,7 @@
 				BC8BC152195B3CCA00D0547F /* ReadingList-Icon-29.png in Resources */,
 				BC8BC149195B3CCA00D0547F /* osk_linkPlaceholder_pad.png in Resources */,
 				BC8BC14A195B3CCA00D0547F /* osk_linkPlaceholder_pad@2x.png in Resources */,
+				BC8BC17F195B898800D0547F /* osk-sinaWeiboIcon-29.png in Resources */,
 				7FEE7780181ED8EF000F684A /* osk-safariIcon-60@2x.png in Resources */,
 				7FE466FC1821C9F20054D2BC /* osk-messagesIcon-76.png in Resources */,
 				7FEE763D181ED83D000F684A /* InfoPlist.strings in Resources */,
@@ -2418,6 +2451,7 @@
 				7F77F42B1822F7760019452C /* osk-pinboardIcon-29.png in Resources */,
 				7FE466F31821C9F20054D2BC /* osk-appStoreIcon-76.png in Resources */,
 				BC8BC104195B3CCA00D0547F /* osk-copyIcon-yellow-76.png in Resources */,
+				BC8BC183195B898800D0547F /* osk-sinaWeiboIcon-76@2x.png in Resources */,
 				BC8BC13A195B3CCA00D0547F /* osk-safariIcon-29@2x.png in Resources */,
 				BC8BC0DB195B3CCA00D0547F /* Drafts-Icon-76.png in Resources */,
 				7FDCDE9B181EE1BA00AC2985 /* type.jpg in Resources */,
@@ -2461,6 +2495,7 @@
 				8895C32F18A3B967000B7F28 /* GooglePlus.bundle in Resources */,
 				7FEE776C181ED8EF000F684A /* Instapaper-Icon-76.png in Resources */,
 				7FE467321821E9650054D2BC /* osk-readabilityIcon-29@2x.png in Resources */,
+				BC8BC182195B898800D0547F /* osk-sinaWeiboIcon-76.png in Resources */,
 				BC8BC11C195B3CCA00D0547F /* osk-mailIcon-60@2x.png in Resources */,
 				BC8BC14E195B3CCA00D0547F /* Pocket-Icon-29@2x.png in Resources */,
 				BC8BC0F5195B3CCA00D0547F /* osk-appDotNetIcon-29.png in Resources */,
@@ -2479,6 +2514,8 @@
 				7F77F43A1822FAC60019452C /* Icon-76@2x.png in Resources */,
 				7FE466EE1821C9F20054D2BC /* Chrome-Icon-76@2x.png in Resources */,
 				BC8BC153195B3CCA00D0547F /* ReadingList-Icon-29@2x.png in Resources */,
+				BC8BC178195B863E00D0547F /* osk-tencentWeiboIcon-76.png in Resources */,
+				BC8BC181195B898800D0547F /* osk-sinaWeiboIcon-60@2x.png in Resources */,
 				BC8BC15D195B3CCA00D0547F /* Things-Icon-60@2x.png in Resources */,
 				BC8BC145195B3CCA00D0547F /* osk-twitterIcon-29@2x.png in Resources */,
 				7FEE779C181ED8EF000F684A /* OSKActivityCollectionViewCell_Pad.xib in Resources */,
@@ -2512,6 +2549,7 @@
 				BC8BC129195B3CCA00D0547F /* osk-navbarButton@2x.png in Resources */,
 				BC8BC117195B3CCA00D0547F /* osk-iconMask-bw-60@2x.png in Resources */,
 				7FE467001821C9F20054D2BC /* osk-photosIcon-76@2x.png in Resources */,
+				BC8BC179195B863E00D0547F /* osk-tencentWeiboIcon-76@2x.png in Resources */,
 				BC8BC114195B3CCA00D0547F /* osk-icon-border-76@2x.png in Resources */,
 				7FE466F21821C9F20054D2BC /* osk-appDotNetIcon-76@2x.png in Resources */,
 				BC8BC100195B3CCA00D0547F /* osk-copyIcon-purple-76@2x.png in Resources */,
@@ -2549,10 +2587,12 @@
 				BCD528C11959D7CD004ED76F /* osk-tumblrIcon-60@2x.png in Resources */,
 				F2ED4C0E569909F3BCF64893 /* GooglePlus-Icon-60.png in Resources */,
 				F2ED4696B1DB571FBBE9204A /* GooglePlus-Icon-60@2x.png in Resources */,
+				BC8BC176195B863E00D0547F /* osk-tencentWeiboIcon-29@2x.png in Resources */,
 				7F14C96718DB724000E635FE /* osk_linkPlaceholder_phone@2x.png in Resources */,
 				F2ED44FF27CCD7E9F8A34E77 /* GooglePlus-Icon-76.png in Resources */,
 				BC8BC155195B3CCA00D0547F /* ReadingList-Icon-60@2x.png in Resources */,
 				BC8BC0FD195B3CCA00D0547F /* osk-copyIcon-purple-29@2x.png in Resources */,
+				BC8BC177195B863E00D0547F /* osk-tencentWeiboIcon-60@2x.png in Resources */,
 				BC8BC0FC195B3CCA00D0547F /* osk-copyIcon-purple-29.png in Resources */,
 				BC8BC0F8195B3CCA00D0547F /* osk-appDotNetIcon-76.png in Resources */,
 				BC8BC0E6195B3CCA00D0547F /* Instapaper-Icon-60@2x.png in Resources */,

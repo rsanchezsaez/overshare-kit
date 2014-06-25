@@ -70,9 +70,9 @@ static NSInteger OSKTencentWeiboActivity_FallbackShortURLEstimate = 24;
 + (UIImage *)iconForIdiom:(UIUserInterfaceIdiom)idiom {
     UIImage *image = nil;
     if (idiom == UIUserInterfaceIdiomPhone) {
-        image = [UIImage imageNamed:@"osk-twitterIcon-60.png"];
+        image = [UIImage imageNamed:@"osk-tencentWeiboIcon-60.png"];
     } else {
-        image = [UIImage imageNamed:@"osk-twitterIcon-76.png"];
+        image = [UIImage imageNamed:@"osk-tencentWeiboIcon-76.png"];
     }
     return image;
 }

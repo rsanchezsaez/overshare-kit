@@ -69,9 +69,9 @@ static NSInteger OSKSinaWeiboActivity_MaxImageCount = 1;
 + (UIImage *)iconForIdiom:(UIUserInterfaceIdiom)idiom {
     UIImage *image = nil;
     if (idiom == UIUserInterfaceIdiomPhone) {
-        image = [UIImage imageNamed:@"osk-twitterIcon-60.png"];
+        image = [UIImage imageNamed:@"osk-sinaWeiboIcon-60.png"];
     } else {
-        image = [UIImage imageNamed:@"osk-twitterIcon-76.png"];
+        image = [UIImage imageNamed:@"osk-sinaWeiboIcon-76.png"];
     }
     return image;
 }
