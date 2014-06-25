@@ -768,6 +768,12 @@ willRepositionPopoverToRect:(inout CGRect *)rect
         else if ([activityType isEqualToString:OSKActivityType_iOS_Facebook]) {
             text = @"Post";
         }
+        else if ([activityType isEqualToString:OSKActivityType_iOS_SinaWeibo]) {
+            text = @"Post";
+        }
+        else if ([activityType isEqualToString:OSKActivityType_iOS_TencentWeibo]) {
+            text = @"Post";
+        }
         else {
             text = @"Send";
         }
