@@ -20,7 +20,8 @@
 static NSInteger OSKTwitterActivity_MaxCharacterCount = 140;
 static NSInteger OSKTwitterActivity_MaxUsernameLength = 20;
 static NSInteger OSKTwitterActivity_MaxImageCount = 1;
-static NSInteger OSKTwitterActivity_FallbackShortURLEstimate = 24;
+static NSInteger OSKTwitterActivity_FallbackShortURLEstimateHTTP = 22;
+static NSInteger OSKTwitterActivity_FallbackShortURLEstimateHTTPS = 23;
 
 @interface OSKTwitterActivity ()
 
@@ -171,8 +172,7 @@ static NSInteger OSKTwitterActivity_FallbackShortURLEstimate = 24;
     extraURLLength += 1;
 
     NSInteger composedLength = [text osk_lengthAdjustingForComposedCharacters];
-    NSInteger reservedLengthForImageAttachment = (contentItem.images.count) ? estimatedShortURLLength_http : 0;
-    NSInteger estimatedLength = composedLength + textLengthAdjustmentForTCOLinks + reservedLengthForImageAttachment + extraURLLength;
+    NSInteger estimatedLength = composedLength + textLengthAdjustmentForTCOLinks + extraURLLength;
     NSInteger remainingCharacterCount = [self maximumCharacterCount] - estimatedLength;
     
     [self setRemainingCharacterCount:remainingCharacterCount];
@@ -199,7 +199,7 @@ static NSInteger OSKTwitterActivity_FallbackShortURLEstimate = 24;
     if (_estimatedShortURLLength_http != nil) {
         estimatedLength = _estimatedShortURLLength_http;
     } else {
-        estimatedLength = @(OSKTwitterActivity_FallbackShortURLEstimate);
+        estimatedLength = @(OSKTwitterActivity_FallbackShortURLEstimateHTTP);
         [self updateOfficialShortURLLengths:nil];
     }
     
@@ -213,7 +213,7 @@ static NSInteger OSKTwitterActivity_FallbackShortURLEstimate = 24;
     if (_estimatedShortURLLength_https != nil) {
         estimatedLength = _estimatedShortURLLength_https;
     } else {
-        estimatedLength = @(OSKTwitterActivity_FallbackShortURLEstimate);
+        estimatedLength = @(OSKTwitterActivity_FallbackShortURLEstimateHTTPS);
         [self updateOfficialShortURLLengths:nil];
     }
     
@@ -233,15 +233,15 @@ static NSInteger OSKTwitterActivity_FallbackShortURLEstimate = 24;
             NSNumber *httpNumber = configurationParameters[OSKTwitterImageHttpURLLengthKey];
             CGFloat httpEstimate = (httpNumber.integerValue)
                                     ? httpNumber.integerValue
-                                    : OSKTwitterActivity_FallbackShortURLEstimate;
+                                    : OSKTwitterActivity_FallbackShortURLEstimateHTTP;
 
              NSNumber *httpsNumber = configurationParameters[OSKTwitterImageHttpsURLLengthKey];
              CGFloat httpsEstimate = (httpsNumber.integerValue)
                                     ? httpsNumber.integerValue
-                                    : OSKTwitterActivity_FallbackShortURLEstimate;
+                                    : OSKTwitterActivity_FallbackShortURLEstimateHTTPS;
 
              [weakSelf setEstimatedShortURLLength_http:@(httpEstimate)];
-             [weakSelf setEstimatedShortURLLength_http:@(httpsEstimate)];
+             [weakSelf setEstimatedShortURLLength_https:@(httpsEstimate)];
 
              if (completion) {
                 completion(httpNumber != nil && httpsNumber != nil);

@@ -18,7 +18,7 @@
 #define kOSKTwitterConfigurationCache		@"OSKTwitterConfigurationCachePref"
 #define kOSKTwitterConfigurationCacheDate	@"OSKTwitterConfigurationCacheDatePref"
 
-NSString * const OSKTwitterImageHttpURLLengthKey = @"short_url_length_http";
+NSString * const OSKTwitterImageHttpURLLengthKey = @"short_url_length";
 NSString * const OSKTwitterImageHttpsURLLengthKey = @"short_url_length_https";
 NSString * const OSKTwitterImageSizeLimitKey = @"photo_size_limit";
 
