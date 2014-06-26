@@ -13,4 +13,6 @@
 
 @interface OSKTwitterActivity : OSKActivity <OSKMicrobloggingActivity, OSKActivity_SystemAccounts>
 
+- (void)updateOfficialShortURLLengths:(void(^)(BOOL retrievedFromOfficialSource))completion;
+
 @end

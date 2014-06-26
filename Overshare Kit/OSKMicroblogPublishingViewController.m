@@ -24,6 +24,7 @@
 #import "UIImage+OSKUtilities.h"
 #import "OSKLinkShorteningUtility.h"
 #import "OSKTwitterText.h"
+#import "OSKTwitterActivity.h"
 
 @interface OSKMicroblogPublishingViewController ()
 <
@@ -96,6 +97,17 @@
     
     [self setupTextView];
     [self.textView becomeFirstResponder];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if ([[[self.activity class] activityType] isEqualToString:OSKActivityType_iOS_Twitter]) {
+        OSKTwitterActivity *twitterActivity = (OSKTwitterActivity *)self.activity;
+        [twitterActivity updateOfficialShortURLLengths:^(BOOL retrievedFromOfficialSource) {
+            [self updateRemainingCharacterCountLabel];
+        }];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {

@@ -190,11 +190,7 @@ static NSInteger OSKTwitterActivity_FallbackShortURLEstimate = 24;
         estimatedLength = _estimatedShortURLLength_http;
     } else {
         estimatedLength = @(OSKTwitterActivity_FallbackShortURLEstimate);
-        __weak OSKTwitterActivity *weakSelf = self;
-        [self updateOfficialShortURLLengths:^(NSInteger httpLength, NSInteger httpsLength, BOOL retrievedFromOfficialSource) {
-            [weakSelf setEstimatedShortURLLength_http:@(httpLength)];
-            [weakSelf setEstimatedShortURLLength_http:@(httpsLength)];
-        }];
+        [self updateOfficialShortURLLengths:nil];
     }
     
     return estimatedLength;
@@ -208,18 +204,19 @@ static NSInteger OSKTwitterActivity_FallbackShortURLEstimate = 24;
         estimatedLength = _estimatedShortURLLength_https;
     } else {
         estimatedLength = @(OSKTwitterActivity_FallbackShortURLEstimate);
-        __weak OSKTwitterActivity *weakSelf = self;
-        [self updateOfficialShortURLLengths:^(NSInteger httpLength, NSInteger httpsLength, BOOL retrievedFromOfficialSource) {
-            [weakSelf setEstimatedShortURLLength_http:@(httpLength)];
-            [weakSelf setEstimatedShortURLLength_http:@(httpsLength)];
-        }];
+        [self updateOfficialShortURLLengths:nil];
     }
     
     return estimatedLength;
 }
 
-- (void)updateOfficialShortURLLengths:(void(^)(NSInteger httpLength, NSInteger httpsLength, BOOL retrievedFromOfficialSource))completion {
-    if (self.activeSystemAccount) {
+- (void)updateOfficialShortURLLengths:(void(^)(BOOL retrievedFromOfficialSource))completion {
+    static BOOL twiterOfficialShortURLLengthsRequestSent = NO;
+    if (self.activeSystemAccount && !twiterOfficialShortURLLengthsRequestSent) {
+        twiterOfficialShortURLLengthsRequestSent = YES;
+
+        __weak OSKTwitterActivity *weakSelf = self;
+
         [OSKTwitterUtility
          requestTwitterConfiguration:self.activeSystemAccount
          completion:^(NSError *error, NSDictionary *configurationParameters) {
@@ -233,15 +230,18 @@ static NSInteger OSKTwitterActivity_FallbackShortURLEstimate = 24;
                                     ? httpsNumber.integerValue
                                     : OSKTwitterActivity_FallbackShortURLEstimate;
 
+             [weakSelf setEstimatedShortURLLength_http:@(httpEstimate)];
+             [weakSelf setEstimatedShortURLLength_http:@(httpsEstimate)];
+
              if (completion) {
-                completion(httpEstimate, httpsEstimate, (httpNumber != nil && httpsNumber != nil));
+                completion(httpNumber != nil && httpsNumber != nil);
             }
         }];
     }
     else {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (completion) {
-                completion(OSKTwitterActivity_FallbackShortURLEstimate, OSKTwitterActivity_FallbackShortURLEstimate, NO);
+                completion(NO);
             }
         });
     }
