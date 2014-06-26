@@ -99,17 +99,6 @@
     [self.textView becomeFirstResponder];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    if ([[[self.activity class] activityType] isEqualToString:OSKActivityType_iOS_Twitter]) {
-        OSKTwitterActivity *twitterActivity = (OSKTwitterActivity *)self.activity;
-        [twitterActivity updateOfficialShortURLLengths:^(BOOL retrievedFromOfficialSource) {
-            [self updateRemainingCharacterCountLabel];
-        }];
-    }
-}
-
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self.textView becomeFirstResponder];
@@ -166,7 +155,29 @@
     [self.keyboardToolbar addSubview:countLabel];
     [self setCharacterCountLabel:countLabel];
     [self updateRemainingCharacterCountLabel];
-    
+    if ([[[self.activity class] activityType] isEqualToString:OSKActivityType_iOS_Twitter]) {
+        OSKTwitterActivity *twitterActivity = (OSKTwitterActivity *)self.activity;
+        [twitterActivity updateOfficialShortURLLengths:^(BOOL retrievedFromOfficialSource) {
+            [self updateRemainingCharacterCountLabel];
+        }];
+    }
+
+    // LINK MINI-ICON
+    // Next to character count when a self.contentItem.textURL is present
+    if ([self.contentItem.textURL length] > 0)
+    {
+        UIImage *linkImage = [[UIImage imageNamed:@"link-button.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        UIImageView *linkImageView = [[UIImageView alloc] initWithImage:linkImage];
+        linkImageView.tintColor = [UIColor darkGrayColor];
+        CGRect linkImageViewFrame = linkImageView.frame;
+        linkImageViewFrame.origin.x = self.keyboardToolbar.bounds.size.width - 50.0f - linkImageView.frame.size.width;
+        linkImageView.frame = linkImageViewFrame;
+        CGPoint linkImageViewCenter = linkImageView.center;
+        linkImageViewCenter.y = countLabel.center.y;
+        linkImageView.center = linkImageViewCenter;
+        [self.keyboardToolbar addSubview:linkImageView];
+    }
+        
     // ACCOUNT BUTTON
     UIButton *accountButton = nil;
     
