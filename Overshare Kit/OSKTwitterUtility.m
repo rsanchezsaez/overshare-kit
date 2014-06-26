@@ -194,7 +194,11 @@ NSString * const OSKTwitterImageSizeLimitKey = @"photo_size_limit";
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     
     if (item.text) {
-        [params setObject:item.text.copy forKey:@"status"];
+        NSMutableString *message = [item.text mutableCopy];
+        if (item.textURL && [item.textURL length] > 0) {
+            [message appendFormat:@" %@", item.textURL];
+        }
+        [params setObject:message forKey:@"status"];
     }
     
     if ((item.latitude != 0.0) && (item.longitude != 0.0)) {

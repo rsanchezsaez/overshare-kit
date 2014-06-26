@@ -144,12 +144,14 @@
     content.facebookItem = facebook;
     
     OSKMicroblogPostContentItem *microblogPost = [[OSKMicroblogPostContentItem alloc] init];
-    microblogPost.text = [NSString stringWithFormat:@"“%@” (Via @%@) %@ ", text, authorName, canonicalURL];
+    microblogPost.text = [NSString stringWithFormat:@"“%@” (Via @%@) %@", text, authorName, canonicalURL];
+    // Uncomment following line to test extra text URL
+    // microblogPost.textURL = canonicalURL;
     microblogPost.images = images;
     content.microblogPostItem = microblogPost;
     
     OSKBlogPostContentItem *blogPost = [[OSKBlogPostContentItem alloc] init];
-    blogPost.text = [NSString stringWithFormat:@"“%@” (Via @%@) %@ ", text, authorName, canonicalURL];
+    blogPost.text = [NSString stringWithFormat:@"“%@” (Via @%@) %@", text, authorName, canonicalURL];
     blogPost.title = @"My cool tumblr post";
     blogPost.textHeader = @"<strong>Post header with a strong tag.</strong>";
     blogPost.textFooter = @"<em>Post footer with an em tag.</em>";

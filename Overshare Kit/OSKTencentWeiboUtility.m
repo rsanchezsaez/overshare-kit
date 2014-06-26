@@ -74,7 +74,14 @@
     NSURL *URL = [NSURL URLWithString:@"https://open.t.qq.com/api/t/add_pic"];
     
     NSMutableDictionary *postDictionary = [[NSMutableDictionary alloc] init];
-    postDictionary[@"content"] = item.text;
+    
+    if (item.text) {
+        NSMutableString *message = [item.text mutableCopy];
+        if (item.textURL && [item.textURL length] > 0) {
+            [message appendFormat:@" %@", item.textURL];
+        }
+        postDictionary[@"content"] = message;
+    }
     
     SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeTencentWeibo
                                             requestMethod:SLRequestMethodPOST

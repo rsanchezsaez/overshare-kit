@@ -159,10 +159,20 @@ static NSInteger OSKTwitterActivity_FallbackShortURLEstimate = 24;
         }
         textLengthAdjustmentForTCOLinks += difference;
     }
-    
+
+    NSUInteger extraURLLength = 0;
+    if ([contentItem.textURL rangeOfString:@"https://"].length != 0) {
+        extraURLLength = estimatedShortURLLength_https;
+    } else if ([contentItem.textURL rangeOfString:@"http://"].location == 0) {
+        extraURLLength = estimatedShortURLLength_http;
+    } else {
+        extraURLLength = [contentItem.textURL osk_lengthAdjustingForComposedCharacters];
+    }
+    extraURLLength += 1;
+
     NSInteger composedLength = [text osk_lengthAdjustingForComposedCharacters];
     NSInteger reservedLengthForImageAttachment = (contentItem.images.count) ? estimatedShortURLLength_http : 0;
-    NSInteger estimatedLength = composedLength + textLengthAdjustmentForTCOLinks + reservedLengthForImageAttachment;
+    NSInteger estimatedLength = composedLength + textLengthAdjustmentForTCOLinks + reservedLengthForImageAttachment + extraURLLength;
     NSInteger remainingCharacterCount = [self maximumCharacterCount] - estimatedLength;
     
     [self setRemainingCharacterCount:remainingCharacterCount];

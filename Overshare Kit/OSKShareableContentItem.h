@@ -116,6 +116,11 @@ extern NSString * const OSKShareableContentItemType_TextEditing;
 @property (copy, nonatomic) NSString *text;
 
 /**
+ An optional plain-text URL that is automatically appended at the end of the posted message. Doesn't show on the input text field. Currently used by Twitter, Sina Weibo and Tencent Weibo.
+ */
+@property (copy, nonatomic) NSString *textURL;
+
+/**
  An optional array of `<UIImage>` objects to be attached to the outgoing post.
  
  @discussion Not all activities support multiple images. Those that do not will simply

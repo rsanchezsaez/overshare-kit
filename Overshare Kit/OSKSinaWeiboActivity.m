@@ -145,7 +145,9 @@ static NSInteger OSKSinaWeiboActivity_MaxImageCount = 1;
     NSString *text = contentItem.text;
     
     NSInteger composedLength = [text osk_lengthAdjustingForComposedCharacters];
-    NSInteger remainingCharacterCount = [self maximumCharacterCount] - composedLength;
+    NSInteger extraURLLength = [contentItem.textURL osk_lengthAdjustingForComposedCharacters] + 1;
+    NSInteger estimatedLength = composedLength + extraURLLength;
+    NSInteger remainingCharacterCount = [self maximumCharacterCount] - estimatedLength;
     
     [self setRemainingCharacterCount:remainingCharacterCount];
     
