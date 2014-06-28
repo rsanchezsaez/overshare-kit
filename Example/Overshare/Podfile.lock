@@ -1,0 +1,39 @@
+PODS:
+  - ADNLogin (2.1.0)
+  - JXHTTP (1.0.0)
+  - OvershareKit (1.3.0-oe):
+    - ADNLogin
+    - PocketAPI
+    - TMTumblrSDK (= 1.0.9-oe)
+  - PocketAPI (1.0.2)
+  - TMTumblrSDK (1.0.9-oe):
+    - TMTumblrSDK/Activity
+    - TMTumblrSDK/APIClient
+    - TMTumblrSDK/AppClient
+    - TMTumblrSDK/Core
+  - TMTumblrSDK/Activity (1.0.9-oe)
+  - TMTumblrSDK/APIClient (1.0.9-oe):
+    - JXHTTP (= 1.0.0)
+    - TMTumblrSDK/APIClient/Authentication
+  - TMTumblrSDK/APIClient/Authentication (1.0.9-oe):
+    - JXHTTP (= 1.0.0)
+    - TMTumblrSDK/Core
+  - TMTumblrSDK/AppClient (1.0.9-oe):
+    - TMTumblrSDK/Core
+  - TMTumblrSDK/Core (1.0.9-oe)
+
+DEPENDENCIES:
+  - OvershareKit (from `../..`)
+
+EXTERNAL SOURCES:
+  OvershareKit:
+    :path: ../..
+
+SPEC CHECKSUMS:
+  ADNLogin: 3828c000fa246c7340b331ed5c336fca8dfe6a1d
+  JXHTTP: dd1fe9c6fa21e7b2be9724ef2be16c66aafc44b4
+  OvershareKit: ab8f32162c802c102550bb67491037736d98e92c
+  PocketAPI: 801df1a3cdd094e5477add10c80dceb533c98a66
+  TMTumblrSDK: 44d2789d18fab771538bd9a49c53910c770a331d
+
+COCOAPODS: 0.33.1
