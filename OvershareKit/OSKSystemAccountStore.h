@@ -88,6 +88,13 @@
  */
 - (void)setLastUsedAccountIdentifier:(NSString *)identifier forType:(NSString *)accountTypeIdentifier;
 
+/**
+ Returns the most recent active system account, for a given activity type, or nil if none;
+ 
+ @param accountTypeIdentifier The iOS account type identifier (See ACAccountType.h)
+ */
+- (ACAccount *)lastUsedAccountForType:(NSString *)accountTypeIdentifier;
+
 @end
 
 

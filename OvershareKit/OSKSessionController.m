@@ -105,21 +105,9 @@
     }
     else {
         OSKSystemAccountStore *accountStore = [OSKSystemAccountStore sharedInstance];
-        NSString *systemAccountTypeIdentifier = [theActivity.class systemAccountTypeIdentifier];
-        NSArray *existingAccounts = [accountStore accountsForAccountTypeIdentifier:systemAccountTypeIdentifier];
-        NSString *lastUsedAccountID = [accountStore lastUsedAccountIdentifierForType:systemAccountTypeIdentifier];
+        ACAccount *account  = [accountStore lastUsedAccountForType:[theActivity.class systemAccountTypeIdentifier]];
 
-        if (existingAccounts.count > 0) {
-            ACAccount *account = nil;
-            for (ACAccount *anAccount in existingAccounts) {
-                if ([anAccount.identifier isEqualToString:lastUsedAccountID]) {
-                    account = anAccount;
-                    break;
-                }
-            }
-            if (account == nil) {
-                account = [existingAccounts firstObject];
-            }
+        if (account) {
             [theActivity setActiveSystemAccount:account];
             [self handlePublishingStepForActivity:activity];
         }
@@ -246,9 +234,8 @@
     NSAssert([activity respondsToSelector:@selector(activeManagedAccount)], @"OSKActivity subclasses using the managed account authentication method must conform to the OSKActivity_ManagedAccounts protocol.");
     OSKActivity <OSKActivity_ManagedAccounts> *theActivity = (OSKActivity <OSKActivity_ManagedAccounts> *)activity;
     OSKManagedAccountStore *accountStore = [OSKManagedAccountStore sharedInstance];
-    NSArray *existingAccounts = [accountStore accountsForActivityType:[theActivity.class activityType]];
-    if (existingAccounts.count > 0) {
-        OSKManagedAccount *activeAccount = [accountStore activeAccountForActivityType:[activity.class activityType]];
+    OSKManagedAccount *activeAccount = [accountStore activeAccountForActivityType:[activity.class activityType]];
+    if (activeAccount) {
         [theActivity setActiveManagedAccount:activeAccount];
         [self handlePublishingStepForActivity:theActivity];
     }

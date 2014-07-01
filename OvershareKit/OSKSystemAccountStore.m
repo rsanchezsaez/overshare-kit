@@ -99,6 +99,28 @@ static NSString * OSKSystemAccountStoreSavedActiveAccountIDsKey = @"OSKSystemAcc
     }
 }
 
+- (ACAccount *)lastUsedAccountForType:(NSString *)accountTypeIdentifier {
+    NSParameterAssert(accountTypeIdentifier);
+    
+    NSArray *existingAccounts = [self accountsForAccountTypeIdentifier:accountTypeIdentifier];
+    NSString *lastUsedAccountID = [self lastUsedAccountIdentifierForType:accountTypeIdentifier];
+    
+    ACAccount *account = nil;
+    if (existingAccounts.count > 0) {
+        for (ACAccount *anAccount in existingAccounts) {
+            if ([anAccount.identifier isEqualToString:lastUsedAccountID]) {
+                account = anAccount;
+                break;
+            }
+        }
+        if (account == nil) {
+            account = [existingAccounts firstObject];
+        }
+    }
+    
+    return account;
+}
+
 @end
 
 
