@@ -28,9 +28,9 @@
 
 @interface OSKMicroblogPublishingViewController ()
 <
-    OSKUITextViewSubstituteDelegate,
-    OSKMicrobloggingTextViewAttachmentsDelegate,
-    OSKAccountChooserViewControllerDelegate
+OSKUITextViewSubstituteDelegate,
+OSKMicrobloggingTextViewAttachmentsDelegate,
+OSKAccountChooserViewControllerDelegate
 >
 
 @property (weak, nonatomic) IBOutlet OSKMicrobloggingTextView *textView;
@@ -126,7 +126,7 @@
 
 - (void)setupKeyboardToolbar {
     OSKPresentationManager *presManager = [OSKPresentationManager sharedInstance];
-
+    
     // TOOLBAR
     self.keyboardToolbar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44.0f)];
     self.keyboardToolbar.backgroundColor = presManager.color_toolbarBackground;
@@ -161,10 +161,10 @@
             [self updateRemainingCharacterCountLabel];
         }];
     }
-
+    
     // LINK MINI-ICON
     // Next to character count when a self.contentItem.textURL is present
-    if ([self.contentItem.textURL length] > 0)
+    if ([self.contentItem respondsToSelector:@selector(textURL)] && [self.contentItem.textURL length] > 0)
     {
         UIImage *linkImage = [[UIImage imageNamed:@"link-button.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         UIImageView *linkImageView = [[UIImageView alloc] initWithImage:linkImage];
@@ -177,7 +177,7 @@
         linkImageView.center = linkImageViewCenter;
         [self.keyboardToolbar addSubview:linkImageView];
     }
-        
+    
     // ACCOUNT BUTTON
     UIButton *accountButton = nil;
     
@@ -415,9 +415,9 @@
     }
     if (_leftSpaceItemA == nil) {
         _leftSpaceItemA = [[UIBarButtonItem alloc]
-                            initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                            target:nil
-                            action:nil];
+                           initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                           target:nil
+                           action:nil];
     }
 }
 
@@ -433,7 +433,7 @@
                 
                 __weak OSKMicroblogPostContentItem *item = self.contentItem;
                 __weak OSKMicroblogPublishingViewController *weakSelf = self;
-
+                
                 [self pushLinkShorteningActivity];
                 [OSKLinkShorteningUtility shortenURL:longURL completion:^(NSString *shortURL) {
                     [weakSelf popLinkShorteningActivity];

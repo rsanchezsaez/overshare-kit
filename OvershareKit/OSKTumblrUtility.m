@@ -23,12 +23,12 @@
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     
     NSMutableString *body = [NSMutableString new];
-    if (item.textHeader && item.textHeader.length > 0)
+    if ([item respondsToSelector:@selector(textHeader)] && item.textHeader.length > 0)
     {
         [body appendFormat:@"%@\n", item.textHeader];
     }
     [body appendString:item.text];
-    if (item.textFooter && item.textFooter.length > 0)
+    if ([item respondsToSelector:@selector(textFooter)] && item.textFooter.length > 0)
     {
         [body appendFormat:@"\n%@", item.textFooter];
     }
@@ -48,13 +48,13 @@
     [[TMAPIClient sharedInstance] text:credential.accountID
                             parameters:parameters
                               callback:^(id response, NSError *error) {
-         if (error) {
-             OSKLog(@"Failed to send Tumblr post: %@", error);
-         }
-         if (completion) {
-             completion(!error, error);
-         }
-     }];
+                                  if (error) {
+                                      OSKLog(@"Failed to send Tumblr post: %@", error);
+                                  }
+                                  if (completion) {
+                                      completion(!error, error);
+                                  }
+                              }];
 }
 
 @end
