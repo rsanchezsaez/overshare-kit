@@ -9,6 +9,7 @@
 #import "OSKPresentationManager.h"
 
 @import MessageUI;
+@import Accounts;
 
 #import "OSKColors.h"
 #import "OSKActivity.h"
@@ -35,6 +36,9 @@
 #import "OSKMailComposeViewController.h"
 #import "OSKNavigationController.h"
 #import "OSKPresentationManager_Protected.h"
+#import "OSKManagedAccountStore.h"
+#import "OSKSystemAccountStore.h"
+#import "OSKManagedAccount.h"
 #import "UIViewController+OSKUtilities.h"
 #import "UIColor+OSKUtility.h"
 

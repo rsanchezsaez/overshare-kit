@@ -23,7 +23,7 @@
 
 
 // SELECTING ACCOUNTS FOR ACTIVITIES
-@property (copy, nonatomic) OSKActivity <OSKActivity_ManagedAccounts> *managedAccountActivity;
+@property (copy, nonatomic) OSKActivity *activity;
 @property (strong, nonatomic) ACAccount *selectedSystemAccount;
 @property (copy, nonatomic) NSString *systemAccountTypeIdentifier;
 @property (strong, nonatomic) OSKManagedAccount *selectedManagedAccount;
@@ -49,21 +49,31 @@
 
 - (instancetype)initForManagingAccountsOfActivityClass:(Class)activityClass {
     NSAssert([activityClass isSubclassOfClass:[OSKActivity class]], @"OSKAccountChooserViewController requires an OSKActivity subclass passed to initForManagingAccountsOfActivityClass:");
-    NSAssert([activityClass authenticationMethod] == OSKAuthenticationMethod_ManagedAccounts, @"OSKAccountChooserViewController requires a subclass of OSKActivity that conforms to OSKActivity_ManagedAccounts");
+    NSAssert([activityClass authenticationMethod] == OSKAuthenticationMethod_ManagedAccounts || [activityClass authenticationMethod] == OSKAuthenticationMethod_SystemAccounts, @"OSKAccountChooserViewController requires a subclass of OSKActivity that conforms to OSKActivity_ManagedAccounts or OSKActivity_SystemAccounts");
     self = [self initWithStyle:UITableViewStylePlain];
     if (self) {
         self.title = [activityClass activityName];
-        _authenticationMethod = OSKAuthenticationMethod_ManagedAccounts;
-        _accounts = [[[OSKManagedAccountStore sharedInstance] accountsForActivityType:[activityClass activityType]] mutableCopy];
-        _managedAccountActivity = [[activityClass alloc] initWithContentItem:nil];
-        _allowsEditing = YES;
+        _authenticationMethod = [activityClass authenticationMethod];
+        _activity = [[activityClass alloc] initWithContentItem:nil];
         _allowsSelection = YES;
         _selectedManagedAccount = [[OSKManagedAccountStore sharedInstance] activeAccountForActivityType:[activityClass activityType]];
-        NSString *addTitle = [OSKPresentationManager sharedInstance].localizedText_Add;
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:addTitle
-                                                                                  style:UIBarButtonItemStyleBordered
-                                                                                 target:self
-                                                                                 action:@selector(addAccountButtonPressed:)];
+        
+        if ([activityClass authenticationMethod] == OSKAuthenticationMethod_ManagedAccounts)
+        {
+            _allowsEditing = YES;
+            _accounts = [[[OSKManagedAccountStore sharedInstance] accountsForActivityType:[activityClass activityType]] mutableCopy];
+            NSString *addTitle = [OSKPresentationManager sharedInstance].localizedText_Add;
+            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:addTitle
+                                                                                      style:UIBarButtonItemStyleBordered
+                                                                                     target:self
+                                                                                     action:@selector(addAccountButtonPressed:)];
+        } else {
+            _allowsEditing = NO;
+            _systemAccountTypeIdentifier = [[activityClass systemAccountTypeIdentifier] copy];
+            OSKSystemAccountStore *store = [OSKSystemAccountStore sharedInstance];
+            _accounts = [[store accountsForAccountTypeIdentifier:_systemAccountTypeIdentifier] mutableCopy];
+            _selectedSystemAccount = [store lastUsedAccountForType:_systemAccountTypeIdentifier];
+        }
     }
     return self;
 }
@@ -74,7 +84,7 @@
     self = [self initWithStyle:UITableViewStylePlain];
     if (self) {
         self.title = [[OSKPresentationManager sharedInstance] localizedText_Accounts];
-        _managedAccountActivity = activity;
+        _activity = activity;
         _authenticationMethod = OSKAuthenticationMethod_ManagedAccounts;
         _accounts = [[[OSKManagedAccountStore sharedInstance] accountsForActivityType:[activity.class activityType]] mutableCopy];
         _selectedManagedAccount = account;
@@ -243,7 +253,7 @@
 
 - (void)addAccountButtonPressed:(id)sender {
     OSKManagedAccountAuthenticationViewControllerType type;
-    type = [self.managedAccountActivity.class authenticationViewControllerType];
+    type = [self.activity.class authenticationViewControllerType];
     if (type == OSKManagedAccountAuthenticationViewControllerType_None) {
         [self authenticateNewAccountWithoutViewController];
     } else {
@@ -253,7 +263,7 @@
 
 - (void)authenticateNewAccountWithoutViewController {
     __weak OSKAccountChooserViewController *weakSelf = self;
-    [self.managedAccountActivity authenticateNewAccountWithoutViewController:^(OSKManagedAccount *account, NSError *error) {
+    [(OSKActivity <OSKActivity_ManagedAccounts> *) self.activity authenticateNewAccountWithoutViewController:^(OSKManagedAccount *account, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (account) {
                 [weakSelf handleNewManagedAccount:account];
@@ -266,8 +276,8 @@
 
 - (void)showAuthViewController {
     OSKPresentationManager *presManager = [OSKPresentationManager sharedInstance];
-    UIViewController <OSKAuthenticationViewController> *authViewController = [presManager authenticationViewControllerForActivity:self.managedAccountActivity];
-    [authViewController prepareAuthenticationViewForActivity:self.managedAccountActivity delegate:self];
+    UIViewController <OSKAuthenticationViewController> *authViewController = [presManager authenticationViewControllerForActivity:self.activity];
+    [authViewController prepareAuthenticationViewForActivity:(OSKActivity <OSKActivity_ManagedAccounts> *)self.activity delegate:self];
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         OSKNavigationController *navController = [[OSKNavigationController alloc] initWithRootViewController:authViewController];
@@ -279,8 +289,8 @@
 
 - (void)handleNewManagedAccount:(OSKManagedAccount *)account {
     OSKManagedAccountStore *accountStore = [OSKManagedAccountStore sharedInstance];
-    [accountStore addAccount:account forActivityType:[self.managedAccountActivity.class activityType]];
-    _accounts = [[accountStore accountsForActivityType:[self.managedAccountActivity.class activityType]] mutableCopy];
+    [accountStore addAccount:account forActivityType:[self.activity.class activityType]];
+    _accounts = [[accountStore accountsForActivityType:[self.activity.class activityType]] mutableCopy];
     
     if (self.allowsSelection) {
         [self setSelectedManagedAccount:account];
@@ -329,7 +339,7 @@
 
 #pragma mark - Authentication View Controller Delegate
 
-- (void)authenticationViewController:(UIViewController <OSKAuthenticationViewController> *)viewController didAuthenticateNewAccounts:(NSArray *)accounts withActivity:(OSKActivity <OSKActivity_ManagedAccounts>*)activity {
+- (void)authenticationViewController:(UIViewController <OSKAuthenticationViewController> *)viewController didAuthenticateNewAccounts:(NSArray *)accounts withActivity:(OSKActivity <OSKActivity_ManagedAccounts> *)activity {
     for (OSKManagedAccount *account in accounts)
     {
         [self handleNewManagedAccount:account];

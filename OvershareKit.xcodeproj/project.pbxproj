@@ -123,6 +123,7 @@
 		BC105DAA195E0C8800B0448D /* NSString+OSK_UUID.m in Sources */ = {isa = PBXBuildFile; fileRef = BC105CB6195E0C8800B0448D /* NSString+OSK_UUID.m */; };
 		BC105DAB195E0C8800B0448D /* NSString+OSKDerp.m in Sources */ = {isa = PBXBuildFile; fileRef = BC105CB8195E0C8800B0448D /* NSString+OSKDerp.m */; };
 		BC105DAC195E0C8800B0448D /* OSKSmartPunctuation.m in Sources */ = {isa = PBXBuildFile; fileRef = BC105CBA195E0C8800B0448D /* OSKSmartPunctuation.m */; };
+		BCE4615C196474DD0052B960 /* OSKAccountStore.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE4615B196474DD0052B960 /* OSKAccountStore.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -662,6 +663,8 @@
 		BC105D42195E0C8800B0448D /* GooglePlus-Icon-76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GooglePlus-Icon-76@2x.png"; sourceTree = "<group>"; };
 		BCE43FCF195E5019002751A4 /* OvershareKit-iOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "OvershareKit-iOS.h"; path = "OvershareKit/OvershareKit-iOS.h"; sourceTree = SOURCE_ROOT; };
 		BCE43FD0195E5019002751A4 /* OvershareKit-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "OvershareKit-Prefix.pch"; path = "OvershareKit/OvershareKit-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		BCE4615A196474DD0052B960 /* OSKAccountStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSKAccountStore.h; sourceTree = "<group>"; };
+		BCE4615B196474DD0052B960 /* OSKAccountStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSKAccountStore.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1641,8 +1644,7 @@
 				BC105B12195E0C8800B0448D /* Shareable Content */,
 				BC105B22195E0C8800B0448D /* Activities (Abstract + Manager) */,
 				BC105C13195E0C8800B0448D /* Activities (Subclasses) */,
-				BC105C1C195E0C8800B0448D /* Managed Accounts */,
-				BC105C1F195E0C8800B0448D /* System Accounts */,
+				BCE46159196474AF0052B960 /* Accounts */,
 				BC105C28195E0C8800B0448D /* Presentation Manager */,
 				BC105C31195E0C8800B0448D /* Sessions */,
 				BC105C72195E0C8800B0448D /* View Controllers */,
@@ -1652,6 +1654,17 @@
 			);
 			path = OvershareKit;
 			sourceTree = SOURCE_ROOT;
+		};
+		BCE46159196474AF0052B960 /* Accounts */ = {
+			isa = PBXGroup;
+			children = (
+				BCE4615A196474DD0052B960 /* OSKAccountStore.h */,
+				BCE4615B196474DD0052B960 /* OSKAccountStore.m */,
+				BC105C1C195E0C8800B0448D /* Managed Accounts */,
+				BC105C1F195E0C8800B0448D /* System Accounts */,
+			);
+			name = Accounts;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -1838,6 +1851,7 @@
 				BC105D94195E0C8800B0448D /* OSKActionSheet.m in Sources */,
 				BC105D45195E0C8800B0448D /* OSKShareableContent.m in Sources */,
 				BC105DA8195E0C8800B0448D /* NSHTTPURLResponse+OSKUtilities.m in Sources */,
+				BCE4615C196474DD0052B960 /* OSKAccountStore.m in Sources */,
 				BC105D4E195E0C8800B0448D /* OSKTumblrUtility.m in Sources */,
 				BC105D79195E0C8800B0448D /* OSKActivityCollectionViewController.m in Sources */,
 				BC105D56195E0C8800B0448D /* OSKADNLoginManager.m in Sources */,

@@ -50,3 +50,6 @@
 #import "OSKSystemAccountStore.h"
 #import "OSKThingsActivity.h"
 #import "OSKTwitterActivity.h"
+#import "OSKTumblrActivity.h"
+#import "OSKSinaWeiboActivity.h"
+#import "OSKTencentWeiboActivity.h"

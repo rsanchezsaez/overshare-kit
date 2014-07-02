@@ -10,6 +10,8 @@
 
 @interface OSKAccountManagementViewController : UITableViewController
 
+- (instancetype)initSimpleManagerWithAllowedActivityClasses:(NSArray *)allowedActivityClasses;
+
 - (instancetype)initWithIgnoredActivityClasses:(NSArray *)ignoredActivityClasses
                 optionalBespokeActivityClasses:(NSArray *)arrayOfClasses;
 

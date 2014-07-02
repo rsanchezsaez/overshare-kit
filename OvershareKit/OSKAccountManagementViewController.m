@@ -36,6 +36,9 @@
 #import "OSKThingsActivity.h"
 #import "OSKTwitterActivity.h"
 #import "OSKGooglePlusActivity.h"
+#import "OSKTumblrActivity.h"
+#import "OSKSinaWeiboActivity.h"
+#import "OSKTencentWeiboActivity.h"
 
 @interface OSKAccountManagementHeaderView : UITableViewHeaderFooterView
 
@@ -89,6 +92,17 @@ static NSString * OSKAccountManagementHeaderViewIdentifier = @"OSKAccountManagem
 
 @implementation OSKAccountManagementViewController
 
+- (instancetype)initSimpleManagerWithAllowedActivityClasses:(NSArray *)allowedActivityClasses {
+    self = [super initWithStyle:UITableViewStyleGrouped];
+    if (self) {
+        
+        self.title = @"Sharing";
+        
+        [self setManagedAccountClasses:allowedActivityClasses];
+    }
+    return self;
+}
+
 - (instancetype)initWithIgnoredActivityClasses:(NSArray *)ignoredActivityClasses optionalBespokeActivityClasses:(NSArray *)arrayOfClasses {
     self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {
@@ -112,6 +126,7 @@ static NSString * OSKAccountManagementHeaderViewIdentifier = @"OSKAccountManagem
     [defaultClasses addObject:[OSKPocketActivity class]];
     [defaultClasses addObject:[OSKReadabilityActivity class]];
     [defaultClasses addObject:[OSKPinboardActivity class]];
+    [defaultClasses addObject:[OSKTumblrActivity class]];
     
     for (Class ignoredClass in ignoredActivityClasses) {
         if ([defaultClasses containsObject:ignoredClass]) {
@@ -155,6 +170,9 @@ static NSString * OSKAccountManagementHeaderViewIdentifier = @"OSKAccountManagem
     [defaultClasses addObject:[OSKTwitterActivity class]];
     [defaultClasses addObject:[OSKFacebookActivity class]];
     [defaultClasses addObject:[OSKGooglePlusActivity class]];
+    [defaultClasses addObject:[OSKSinaWeiboActivity class]];
+    [defaultClasses addObject:[OSKTencentWeiboActivity class]];
+    [defaultClasses addObject:[OSKTumblrActivity class]];
 
     if ([OSK1PasswordSearchActivity isAvailable]) {
         [defaultClasses addObject:[OSK1PasswordSearchActivity class]];
@@ -226,7 +244,7 @@ static NSString * OSKAccountManagementHeaderViewIdentifier = @"OSKAccountManagem
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return ( [self.managedAccountClasses count] ? 1 : 0 ) + ( [self.toggleClasses count] ? 1 : 0 ) ;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -284,7 +302,8 @@ static NSString * OSKAccountManagementHeaderViewIdentifier = @"OSKAccountManagem
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == ACCOUNTS_SECTION) {
         Class activityClass = self.managedAccountClasses[indexPath.row];
-        if ([activityClass authenticationMethod] == OSKAuthenticationMethod_ManagedAccounts) {
+        if ([activityClass authenticationMethod] == OSKAuthenticationMethod_ManagedAccounts
+            || [activityClass authenticationMethod] == OSKAuthenticationMethod_SystemAccounts) {
             OSKAccountChooserViewController *chooser = [[OSKAccountChooserViewController alloc] initForManagingAccountsOfActivityClass:activityClass];
             [self.navigationController pushViewController:chooser animated:YES];
         } else {

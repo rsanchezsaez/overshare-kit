@@ -13,6 +13,7 @@
 #import "OSKPresentationManager.h"
 #import "OSKManagedAccountStore.h"
 #import "OSKManagedAccount.h"
+#import "OSKSystemAccountStore.h"
 #import "OSKActivity_GenericAuthentication.h"
 
 NSString * const OSKAccountTypeCellIdentifier = @"OSKAccountTypeCellIdentifier";
@@ -64,7 +65,11 @@ static UIBezierPath *clippingPath;
     OSKAuthenticationMethod method = [_activityClass authenticationMethod];
     if (method == OSKAuthenticationMethod_ManagedAccounts) {
         [self setGenericActivity:nil];
-        [self updateExistingAccountsDescription];
+        [self updateManagedExistingAccountsDescription];
+    }
+    else if (method == OSKAuthenticationMethod_SystemAccounts) {
+        [self setGenericActivity:nil];
+        [self updateSystemExistingAccountsDescription];
     }
     else if (method == OSKAuthenticationMethod_Generic) {
         _genericActivity = [[_activityClass alloc] initWithContentItem:nil];
@@ -72,13 +77,28 @@ static UIBezierPath *clippingPath;
     }
 }
 
-- (void)updateExistingAccountsDescription {
+- (void)updateManagedExistingAccountsDescription {
     NSArray *accounts = [[OSKManagedAccountStore sharedInstance] accountsForActivityType:[_activityClass activityType]];
     NSMutableString *detailText = nil;
     if (accounts.count) {
         detailText = [[NSMutableString alloc] init];
         for (OSKManagedAccount *account in accounts) {
             [detailText appendString:[account nonNilDisplayName]];
+            if (account != accounts.lastObject) {
+                [detailText appendFormat:@", "];
+            }
+        }
+    }
+    [self.detailTextLabel setText:detailText];
+}
+
+- (void)updateSystemExistingAccountsDescription {
+    NSArray *accounts = [[OSKSystemAccountStore sharedInstance] accountsForAccountTypeIdentifier:[_activityClass systemAccountTypeIdentifier]];
+    NSMutableString *detailText = nil;
+    if (accounts.count) {
+        detailText = [[NSMutableString alloc] init];
+        for (ACAccount *account in accounts) {
+            [detailText appendString:[account username]];
             if (account != accounts.lastObject) {
                 [detailText appendFormat:@", "];
             }
