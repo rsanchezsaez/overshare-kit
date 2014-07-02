@@ -16,6 +16,8 @@
 /// @name Account Access
 ///-----------------------------------------------
 
++ (instancetype)sharedInstance;
+
 /**
     Return active account (either OSKManagedAccount or ACAccount)
  */

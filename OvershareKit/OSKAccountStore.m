@@ -17,6 +17,13 @@
 
 #pragma mark - Authentication
 
++ (instancetype)sharedInstance {
+    static dispatch_once_t once;
+    static OSKManagedAccountStore * sharedInstance;
+    dispatch_once(&once, ^ { sharedInstance = [[self alloc] init]; });
+    return sharedInstance;
+}
+
 - (id)activeAccountForActivity:(OSKActivity *)activity {
     id account = nil;
     if ([[activity class] authenticationMethod] == OSKAuthenticationMethod_SystemAccounts) {

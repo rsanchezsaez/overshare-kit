@@ -53,3 +53,4 @@
 #import "OSKTumblrActivity.h"
 #import "OSKSinaWeiboActivity.h"
 #import "OSKTencentWeiboActivity.h"
+#import "OSKAccountStore.h"
