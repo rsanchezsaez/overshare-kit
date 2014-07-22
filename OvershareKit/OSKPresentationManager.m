@@ -74,7 +74,7 @@ static NSInteger OSKTextViewFontSize_Pad = 20.0f;
 
 @end
 
-#define USE_UNDOCUMENTED_ANIMATION_CURVE 0
+#define USE_UNDOCUMENTED_ANIMATION_CURVE 1
 
 @implementation OSKPresentationManager
 
