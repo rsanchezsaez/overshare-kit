@@ -1,7 +1,7 @@
 PODS:
   - ADNLogin (2.1.0)
   - JXHTTP (1.0.0)
-  - OvershareKit (1.3.0-oe):
+  - OvershareKit (1.3.2-oe):
     - ADNLogin
     - PocketAPI
     - TMTumblrSDK (= 1.0.9-oe)
@@ -32,7 +32,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   ADNLogin: 3828c000fa246c7340b331ed5c336fca8dfe6a1d
   JXHTTP: dd1fe9c6fa21e7b2be9724ef2be16c66aafc44b4
-  OvershareKit: ab8f32162c802c102550bb67491037736d98e92c
+  OvershareKit: 7848741560edf1ce07cfb7f5d66dff95d2269f00
   PocketAPI: 801df1a3cdd094e5477add10c80dceb533c98a66
   TMTumblrSDK: 44d2789d18fab771538bd9a49c53910c770a331d
 
