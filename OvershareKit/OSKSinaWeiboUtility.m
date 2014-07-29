@@ -72,13 +72,18 @@
 
     NSMutableDictionary *postDictionary = [[NSMutableDictionary alloc] init];
 
+    NSMutableString *message = [NSMutableString new];
     if (item.text) {
-        NSMutableString *message = [item.text mutableCopy];
-        if (item.textURL && [item.textURL length] > 0) {
-            [message appendFormat:@" %@", item.textURL];
-        }
-        postDictionary[@"status"] = message;
+        [message appendString:item.text];
     }
+    if (item.textURL && [item.textURL length] > 0) {
+        if ([message length] > 0)
+        {
+            [message appendString:@" "];
+        }
+        [message appendFormat:@"%@", item.textURL];
+    }
+    postDictionary[@"status"] = message;
     
     if ([item.images count] > 0)
     {
