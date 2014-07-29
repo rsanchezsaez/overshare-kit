@@ -16,6 +16,30 @@
 #import "OSKApplicationCredential.h"
 #import "OSKShareableContentItem.h"
 
+@interface UIImage (OSKFix)
+
+- (UIImage *)imageWithAppliedOrientation;
+
+@end
+
+@implementation UIImage (OSKFix)
+
+// Redraw image so image.imageOrientation is
+// applied to the actual image data
+- (UIImage *)imageWithAppliedOrientation
+{
+    UIGraphicsBeginImageContext(self.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    [self drawAtPoint:CGPointMake(0, 0)];
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+
+@end
+
 @implementation OSKTencentWeiboUtility
 
 #pragma mark - Write Post
@@ -75,13 +99,18 @@
     
     NSMutableDictionary *postDictionary = [[NSMutableDictionary alloc] init];
     
+    NSMutableString *message = [NSMutableString new];
     if (item.text) {
-        NSMutableString *message = [item.text mutableCopy];
-        if (item.textURL && [item.textURL length] > 0) {
-            [message appendFormat:@" %@", item.textURL];
-        }
-        postDictionary[@"content"] = message;
+        [message appendString:item.text];
     }
+    if (item.textURL && [item.textURL length] > 0) {
+        if ([message length] > 0)
+        {
+            [message appendString:@" "];
+        }
+        [message appendFormat:@"%@", item.textURL];
+    }
+    postDictionary[@"content"] = message;
     
     SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeTencentWeibo
                                             requestMethod:SLRequestMethodPOST
@@ -89,7 +118,9 @@
                                                parameters:postDictionary];
     
     if ([item.images count] > 0) {
-        UIImage *image = item.images[0];
+        // Tencent doesn't honor the image.imageOrientation EXIF flag
+        // so we have to redraw it just in case
+        UIImage *image = [item.images[0] imageWithAppliedOrientation];
         [request addMultipartData:UIImageJPEGRepresentation(image, 1.0f) withName:@"pic" type:@"image/jpeg" filename:@"image.jpg"];
     }
     
