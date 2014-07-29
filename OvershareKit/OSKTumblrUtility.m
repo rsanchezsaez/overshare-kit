@@ -27,7 +27,10 @@
     {
         [body appendFormat:@"%@\n", item.textHeader];
     }
-    [body appendString:item.text];
+    if (item.text)
+    {
+        [body appendString:item.text];
+    }
     if ([item respondsToSelector:@selector(textFooter)] && item.textFooter.length > 0)
     {
         [body appendFormat:@"\n%@", item.textFooter];
