@@ -23,8 +23,6 @@ static NSInteger OSKTumblrActivity_MaxImageCount = 0;
 
 @interface OSKTumblrActivity ()
 
-@property (strong, nonatomic) NSTimer *authenticationTimeoutTimer;
-@property (assign, nonatomic) BOOL authenticationTimedOut;
 @property (copy, nonatomic) OSKManagedAccountAuthenticationHandler completionHandler;
 
 @end
@@ -111,22 +109,21 @@ static NSInteger OSKTumblrActivity_MaxImageCount = 0;
 }
 
 - (void)performActivity:(OSKActivityCompletionHandler)completion {
-    __weak OSKTumblrActivity *weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         UIBackgroundTaskIdentifier backgroundTaskIdentifier = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
             if (completion) {
-                completion(weakSelf, NO, nil);
+                completion(self, NO, nil);
             }
         }];
-        [OSKTumblrUtility postContentItem:(OSKBlogPostContentItem *)weakSelf.contentItem
-                           withCredential:weakSelf.activeManagedAccount.credential
-                            appCredential:[weakSelf.class applicationCredential]
+        [OSKTumblrUtility postContentItem:(OSKBlogPostContentItem *)self.contentItem
+                           withCredential:self.activeManagedAccount.credential
+                            appCredential:[self.class applicationCredential]
                                completion:^(BOOL success, NSError *error) {
                                    if (success) {
                                        OSKLog(@"Success! Sent new post to Tumblr.");
                                    }
                                    if (completion) {
-                                       completion(weakSelf, success, error);
+                                       completion(self, success, error);
                                    }
                                    [[UIApplication sharedApplication] endBackgroundTask:backgroundTaskIdentifier];
                                }];
