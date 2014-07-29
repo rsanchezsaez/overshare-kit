@@ -29,10 +29,7 @@
 - (UIImage *)imageWithAppliedOrientation
 {
     UIGraphicsBeginImageContext(self.size);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
     [self drawAtPoint:CGPointMake(0, 0)];
-    
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return image;
