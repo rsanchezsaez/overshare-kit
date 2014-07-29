@@ -13,6 +13,13 @@
 extern NSString * const OSKActivityOption_ExcludedTypes; // NSArray of activity types (strings)
 extern NSString * const OSKActivityOption_BespokeActivities; // NSArray of classes, each inheriting from OSKActivity
 extern NSString * const OSKActivityOption_RequireOperations; // Passing @(YES) filters out activities that can't perform via OSKActivityOperation
+/**
+ Refers to an array of activity types.
+ 
+ Used for ordering displayed activities on the ActionSheet. This key doesn't add or or remove activities, use  OSKActivityOption_ExcludedTypes and OSKActivityOption_BespokeActivities for that. Not included activity types remain unordered.
+ 
+ */
+extern NSString * const OSKActivityOption_OrderedTypes;
 
 // BUILT-IN ACTIVITY TYPES (Your custom OSKActivity subclasses should have their own unique types.)
 extern NSString * const OSKActivityType_iOS_Twitter;

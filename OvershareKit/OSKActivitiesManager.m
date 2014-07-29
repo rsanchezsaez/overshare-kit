@@ -213,7 +213,39 @@ static NSString * OSKActivitiesManagerPersistentExclusionsKey = @"OSKActivitiesM
         }
     }
     
+    NSMutableArray *orderedActivityTypes = [options[OSKActivityOption_OrderedTypes] mutableCopy];
+    NSUInteger currentTargetIndex = 0;
+    
+    NSUInteger currentOrderedActivityTypeIndex = 0;
+    while (currentOrderedActivityTypeIndex < [orderedActivityTypes count]) {
+        NSString *currentOrderedActivityType = orderedActivityTypes[currentOrderedActivityTypeIndex];
+        
+        NSUInteger currentSourceIndex = [self _indexOfActivityWithType:currentOrderedActivityType array:validActivities];
+        if (currentSourceIndex != NSNotFound) {
+            [validActivities exchangeObjectAtIndex:currentSourceIndex withObjectAtIndex:currentTargetIndex];
+            currentTargetIndex++;
+        }
+        
+        currentOrderedActivityTypeIndex++;
+    }
+
     return validActivities;
+}
+
+- (NSUInteger)_indexOfActivityWithType:(NSString *)activityType array:(NSArray *)activityArray
+{
+    NSUInteger foundIndex = NSNotFound;
+    if (activityType) {
+        for (NSUInteger currentIndex = 0; currentIndex < [activityArray count]; currentIndex++)
+        {
+            OSKActivity *activity = activityArray[currentIndex];
+            if ([[[activity class] activityType] isEqualToString:activityType]) {
+                foundIndex = currentIndex;
+                break;
+            }
+        }
+    }
+    return foundIndex;
 }
 
 - (NSArray *)sortedContentItemsForContent:(OSKShareableContent *)content {

@@ -15,6 +15,7 @@
 NSString * const OSKActivityOption_ExcludedTypes = @"OSKActivityOption_ExcludedTypes";
 NSString * const OSKActivityOption_BespokeActivities = @"OSKActivityOption_BespokeActivities";
 NSString * const OSKActivityOption_RequireOperations = @"OSKActivityOption_RequireOperations";
+NSString * const OSKActivityOption_OrderedTypes = @"OSKActivityOption_OrderedTypes";
 
 // ACTIVITY TYPES
 NSString * const OSKActivityType_iOS_Twitter = @"OSKActivityType_iOS_Twitter";

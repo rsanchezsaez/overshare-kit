@@ -35,7 +35,9 @@ extern NSString * const OSKPresentationOption_ActivityCompletionHandler;
  listed below. The block specified by `OSKPresentationOption_PresentationEndingHandler` is
  called whenever the OSK UI is dismissed (via cancellation or otherwise)
  */
+
 extern NSString * const OSKPresentationOption_PresentationEndingHandler;
+
 
 ///-----------------------------------------------
 /// @name Presentation Manager
