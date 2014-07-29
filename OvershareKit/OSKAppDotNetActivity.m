@@ -26,7 +26,6 @@ static NSInteger OSKAppDotNetActivity_MaxImageCount = 4;
 
 @property (strong, nonatomic) NSTimer *authenticationTimeoutTimer;
 @property (assign, nonatomic) BOOL authenticationTimedOut;
-@property (copy, nonatomic) OSKManagedAccountAuthenticationHandler completionHandler;
 
 @end
 
@@ -40,10 +39,6 @@ static NSInteger OSKAppDotNetActivity_MaxImageCount = 4;
     if (self) {
     }
     return self;
-}
-
-- (void)dealloc {
-    [self cancelAuthenticationTimeoutTimer];
 }
 
 #pragma mark - System Account Methods
@@ -188,35 +183,6 @@ static NSInteger OSKAppDotNetActivity_MaxImageCount = 4;
             }];
         }
     }];
-}
-
-#pragma mark - Authentication Timeout
-
-- (void)startAuthenticationTimeoutTimer {
-    NSTimer *timer = [[NSTimer alloc] initWithFireDate:[NSDate dateWithTimeIntervalSinceNow:60*2]
-                                              interval:0
-                                                target:self
-                                              selector:@selector(authenticationTimedOut:)
-                                              userInfo:nil
-                                               repeats:NO];
-    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
-
-}
-
-- (void)cancelAuthenticationTimeoutTimer {
-    [_authenticationTimeoutTimer invalidate];
-    _authenticationTimeoutTimer = nil;
-}
-
-- (void)authenticationTimedOut:(NSTimer *)timer {
-    [self setAuthenticationTimedOut:YES];
-    if (self.completionHandler) {
-        __weak OSKAppDotNetActivity *weakSelf = self;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSError *error = [NSError errorWithDomain:@"OSKAppDotNetActivity" code:408 userInfo:@{NSLocalizedFailureReasonErrorKey:@"ADN authentication via the Passport app timed out."}];
-            weakSelf.completionHandler(nil, error);
-        });
-    }
 }
 
 @end
