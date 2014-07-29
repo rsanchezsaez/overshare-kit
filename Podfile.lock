@@ -1,5 +1,8 @@
 PODS:
   - ADNLogin (2.1.0)
+  - Bolts (1.1.0)
+  - Facebook-iOS-SDK (3.16.2):
+    - Bolts
   - JXHTTP (1.0.0)
   - PocketAPI (1.0.2)
   - TMTumblrSDK (1.0.9-oe):
@@ -20,11 +23,14 @@ PODS:
 
 DEPENDENCIES:
   - ADNLogin
+  - Facebook-iOS-SDK
   - PocketAPI
   - TMTumblrSDK (= 1.0.9-oe)
 
 SPEC CHECKSUMS:
   ADNLogin: 3828c000fa246c7340b331ed5c336fca8dfe6a1d
+  Bolts: 91c2af8eae1d44e1dd75946a5b0ae04a43ea43e4
+  Facebook-iOS-SDK: 34eef640c2cc4c8618ba0f574ad2b290e07f1b4e
   JXHTTP: dd1fe9c6fa21e7b2be9724ef2be16c66aafc44b4
   PocketAPI: 801df1a3cdd094e5477add10c80dceb533c98a66
   TMTumblrSDK: 44d2789d18fab771538bd9a49c53910c770a331d

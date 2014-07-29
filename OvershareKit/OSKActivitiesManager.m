@@ -26,6 +26,7 @@
 #import "OSKDraftsActivity.h"
 #import "OSKEmailActivity.h"
 #import "OSKFacebookActivity.h"
+#import "OSKFacebookSDKActivity.h"
 #import "OSKTumblrActivity.h"
 #import "OSKGooglePlusActivity.h"
 #import "OSKInstapaperActivity.h"
@@ -346,7 +347,14 @@ static NSString * OSKActivitiesManagerPersistentExclusionsKey = @"OSKActivitiesM
                                              requireOperations:requireOperations
                                                           item:item];
     if (facebook) { [activities addObject:facebook]; }
-    
+
+    OSKFacebookSDKActivity *facebookSDK = [self validActivityForType:[OSKFacebookSDKActivity activityType]
+                                                         class:[OSKFacebookSDKActivity class]
+                                                 excludedTypes:excludedActivityTypes
+                                             requireOperations:requireOperations
+                                                          item:item];
+    if (facebookSDK) { [activities addObject:facebookSDK]; }
+
     return activities;
 }
 

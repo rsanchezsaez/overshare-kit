@@ -312,6 +312,9 @@
         } else {
             accountName = self.title;
         }
+    } else if ([self.activity respondsToSelector:@selector(userInfo)])
+    {
+        accountName = [(id)self.activity userInfo][@"name"];
     }
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         [self updateAccountButton_Phone:accountName];
@@ -334,7 +337,10 @@
 }
 
 - (void)accountButtonPressed:(id)sender {
-    [self showSystemAccountChooser];
+    if ([self.activity isKindOfClass:[OSKFacebookActivity class]])
+    {
+        [self showSystemAccountChooser];
+    }
 }
 
 - (void)showSystemAccountChooser {

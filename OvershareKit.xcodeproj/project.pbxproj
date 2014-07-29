@@ -123,6 +123,7 @@
 		BC105DAA195E0C8800B0448D /* NSString+OSK_UUID.m in Sources */ = {isa = PBXBuildFile; fileRef = BC105CB6195E0C8800B0448D /* NSString+OSK_UUID.m */; };
 		BC105DAB195E0C8800B0448D /* NSString+OSKDerp.m in Sources */ = {isa = PBXBuildFile; fileRef = BC105CB8195E0C8800B0448D /* NSString+OSKDerp.m */; };
 		BC105DAC195E0C8800B0448D /* OSKSmartPunctuation.m in Sources */ = {isa = PBXBuildFile; fileRef = BC105CBA195E0C8800B0448D /* OSKSmartPunctuation.m */; };
+		BCB41D9E1987D1FE00A9BC9C /* OSKFacebookSDKActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = BCB41D9C1987D1FD00A9BC9C /* OSKFacebookSDKActivity.m */; };
 		BCE4615C196474DD0052B960 /* OSKAccountStore.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE4615B196474DD0052B960 /* OSKAccountStore.m */; };
 /* End PBXBuildFile section */
 
@@ -661,6 +662,8 @@
 		BC105D40195E0C8800B0448D /* GooglePlus-Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GooglePlus-Icon-60@2x.png"; sourceTree = "<group>"; };
 		BC105D41195E0C8800B0448D /* GooglePlus-Icon-76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GooglePlus-Icon-76.png"; sourceTree = "<group>"; };
 		BC105D42195E0C8800B0448D /* GooglePlus-Icon-76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GooglePlus-Icon-76@2x.png"; sourceTree = "<group>"; };
+		BCB41D9C1987D1FD00A9BC9C /* OSKFacebookSDKActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSKFacebookSDKActivity.m; sourceTree = "<group>"; };
+		BCB41D9D1987D1FD00A9BC9C /* OSKFacebookSDKActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSKFacebookSDKActivity.h; sourceTree = "<group>"; };
 		BCE43FCF195E5019002751A4 /* OvershareKit-iOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "OvershareKit-iOS.h"; path = "OvershareKit/OvershareKit-iOS.h"; sourceTree = SOURCE_ROOT; };
 		BCE43FD0195E5019002751A4 /* OvershareKit-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "OvershareKit-Prefix.pch"; path = "OvershareKit/OvershareKit-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		BCE4615A196474DD0052B960 /* OSKAccountStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSKAccountStore.h; sourceTree = "<group>"; };
@@ -1048,6 +1051,8 @@
 		BC105BEC195E0C8800B0448D /* Facebook */ = {
 			isa = PBXGroup;
 			children = (
+				BCB41D9C1987D1FD00A9BC9C /* OSKFacebookSDKActivity.m */,
+				BCB41D9D1987D1FD00A9BC9C /* OSKFacebookSDKActivity.h */,
 				BC105BE8195E0C8800B0448D /* OSKFacebookActivity.h */,
 				BC105BE9195E0C8800B0448D /* OSKFacebookActivity.m */,
 				BC105BEA195E0C8800B0448D /* OSKFacebookUtility.h */,
@@ -1808,6 +1813,7 @@
 				BC105D88195E0C8800B0448D /* OSKUsernamePasswordViewController.m in Sources */,
 				BC105D97195E0C8800B0448D /* OSKLinkShorteningUtility.m in Sources */,
 				BC105D66195E0C8800B0448D /* OSKReadingListActivity.m in Sources */,
+				BCB41D9E1987D1FE00A9BC9C /* OSKFacebookSDKActivity.m in Sources */,
 				BC105D71195E0C8800B0448D /* OSKPresentationManager.m in Sources */,
 				BC105D4F195E0C8800B0448D /* OSKTumblrActivity.m in Sources */,
 				BC105DA4195E0C8800B0448D /* NSCoder+OSKCoder.m in Sources */,

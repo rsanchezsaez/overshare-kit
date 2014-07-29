@@ -9,7 +9,7 @@
 // Used by activities that require authentication but don't have "accounts",
 // for example the Pocket API, which handles authentication via an opaque SDK.
 
-typedef void(^OSKGenericAuthenticationCompletionHandler)(BOOL successful, NSError *error);
+typedef void(^OSKGenericAuthenticationCompletionHandler)(BOOL successful, BOOL fromCache, NSError *error);
 
 ///------------------------------
 /// @name Generic Authentication

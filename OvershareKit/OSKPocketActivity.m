@@ -46,7 +46,7 @@
         if (completion && weakSelf.authenticationTimedOut == NO) {
             [weakSelf cancelAuthenticationTimeoutTimer];
             dispatch_async(dispatch_get_main_queue(), ^{
-                completion((error == nil), error);
+                completion((error == nil), NO, error);
             });
         }
     }];
@@ -154,7 +154,7 @@
         __weak OSKPocketActivity *weakSelf = self;
         dispatch_async(dispatch_get_main_queue(), ^{
             NSError *error = [NSError errorWithDomain:@"OSKPocketActivity" code:408 userInfo:@{NSLocalizedFailureReasonErrorKey:@"Pocket authentication timed out."}];
-            weakSelf.completionHandler(NO, error);
+            weakSelf.completionHandler(NO, NO, error);
         });
     }
 }

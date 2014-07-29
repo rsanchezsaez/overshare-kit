@@ -13,9 +13,13 @@
 
 @interface OSKFacebookUtility : NSObject
 
+// System account method
 + (void)postContentItem:(OSKFacebookContentItem *)item
         toSystemAccount:(ACAccount *)account
                 options:(NSDictionary *)options /* At this time, just ACFacebookAudienceKey */
              completion:(void(^)(BOOL success, NSError *error))completion;
+
+// SDK method
++ (void)postContentItem:(OSKFacebookContentItem *)item options:(NSDictionary *)options completion:(void(^)(BOOL success, NSError *error))completionBlock;
 
 @end

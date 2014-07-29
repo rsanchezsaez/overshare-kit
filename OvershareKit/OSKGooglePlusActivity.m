@@ -65,7 +65,7 @@ static NSInteger OSKGooglePlusActivity_MaxImageCount = 3;
     if (self.completionHandler && weakSelf.authenticationTimedOut == NO) {
         [weakSelf cancelAuthenticationTimeoutTimer];
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.completionHandler((error == nil), error);
+            self.completionHandler((error == nil), NO, error);
         });
     }
 }
@@ -200,7 +200,7 @@ static NSInteger OSKGooglePlusActivity_MaxImageCount = 3;
         __weak OSKGooglePlusActivity *weakSelf = self;
         dispatch_async(dispatch_get_main_queue(), ^{
             NSError *error = [NSError errorWithDomain:@"OSKGooglePlusActivity" code:408 userInfo:@{NSLocalizedFailureReasonErrorKey:@"Google+ authentication timed out."}];
-            weakSelf.completionHandler(NO, error);
+            weakSelf.completionHandler(NO, NO, error);
         });
     }
 }

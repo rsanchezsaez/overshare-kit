@@ -38,6 +38,8 @@
  */
 - (OSKApplicationCredential *)applicationCredentialForActivityType:(NSString *)activityType;
 
+- (void)activityDidAuthorize:(OSKActivity *)activity;
+
 @end
 
 

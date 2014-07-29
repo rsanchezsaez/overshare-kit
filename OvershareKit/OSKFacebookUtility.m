@@ -13,6 +13,8 @@
 #import "OSKSystemAccountStore.h"
 #import "OSKLogger.h"
 
+#import <FacebookSDK/FacebookSDK.h>
+
 @implementation OSKFacebookUtility
 
 + (void)renewCredentials:(ACAccount *)account completion:(void(^)(BOOL success, NSError *error))completion {
@@ -55,7 +57,7 @@
                 });
             }
             else {
-                NSString *errorMessage = [NSString stringWithFormat:@"[OSKFacebookUtility] Error received when trying to create a new tweet. Server responded with status code %li and response: %@", (long)statusCode, [NSHTTPURLResponse localizedStringForStatusCode:statusCode]];
+                NSString *errorMessage = [NSString stringWithFormat:@"[OSKFacebookUtility] Error received when trying to create a new Facebook post. Server responded with status code %li and response: %@", (long)statusCode, [NSHTTPURLResponse localizedStringForStatusCode:statusCode]];
                 OSKLog(@"%@", errorMessage);
                 NSError *error = [NSError errorWithDomain:@"com.overshare.errors"
                                                      code:statusCode
@@ -177,8 +179,37 @@
     return param;
 }
 
+#pragma mark - Facebook SDK
+
++ (void)postContentItem:(OSKFacebookContentItem *)item options:(NSDictionary *)options completion:(void(^)(BOOL success, NSError *error))completionBlock {
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    
+    NSString *message = @"";
+    if (item.text)
+    {
+        message = item.text;
+    }
+    parameters[@"message"] = message;
+    
+    if (item.link)
+    {
+        parameters[@"link"] = [item.link absoluteString];
+    }
+    
+    [parameters setObject:[self _queryParameterForAudience:options[ACFacebookAudienceKey]] forKey:@"privacy"];
+
+    FBRequest *postRequest = [FBRequest requestWithGraphPath:@"me/feed" parameters:parameters HTTPMethod:@"POST"];
+    [postRequest startWithCompletionHandler: ^(FBRequestConnection *connection,
+                                               NSDictionary* result,
+                                               NSError *error)
+     {
+         BOOL success = (error == nil);
+         if (completionBlock)
+         {
+             completionBlock(success, error);
+         }
+     }];
+    
+}
+
 @end
-
-
-
-
