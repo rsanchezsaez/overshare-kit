@@ -289,17 +289,37 @@ static NSInteger OSKTextViewFontSize_Pad = 20.0f;
 - (void)beginSessionWithSelectedActivity:(OSKActivity *)activity
                 presentingViewController:(UIViewController *)presentingViewController
                                  options:(NSDictionary *)options {
-    
+    [self beginSessionWithSelectedActivity:activity
+                        authenticationOnly:NO
+                  presentingViewController:presentingViewController
+                                   options:options];
+}
+
+- (void)beginAuthenticationWithSelectedActivity:(OSKActivity *)activity
+                       presentingViewController:(UIViewController *)presentingViewController
+                                        options:(NSDictionary *)options {
+    [self beginSessionWithSelectedActivity:activity
+                        authenticationOnly:YES
+                  presentingViewController:presentingViewController
+                                   options:options];
+}
+
+- (void)beginSessionWithSelectedActivity:(OSKActivity *)activity
+                      authenticationOnly:(BOOL)authenticationOnly
+                presentingViewController:(UIViewController *)presentingViewController
+                                 options:(NSDictionary *)options {
     OSKSession *session = [[OSKSession alloc] initWithPresentationEndingHandler:options[OSKPresentationOption_PresentationEndingHandler]
                                                       activityCompletionHandler:options[OSKPresentationOption_ActivityCompletionHandler]];
     [self _proceedWithSession:session
              selectedActivity:activity
+           authenticationOnly:authenticationOnly
      presentingViewController:presentingViewController
             popoverController:nil];
 }
 
 - (void)_proceedWithSession:(OSKSession *)session
            selectedActivity:(OSKActivity *)activity
+         authenticationOnly:(BOOL)authenticationOnly
    presentingViewController:(UIViewController *)presentingViewController
           popoverController:(UIPopoverController *)popoverController {
     
@@ -325,7 +345,7 @@ static NSInteger OSKTextViewFontSize_Pad = 20.0f;
     }
     
     [self.sessionControllers setObject:sessionController forKey:session.sessionIdentifier];
-    [sessionController start];
+    [sessionController startWithAuthenticationOnly:authenticationOnly];
 }
 
 #pragma mark - Popover Delegate
@@ -381,6 +401,7 @@ willRepositionPopoverToRect:(inout CGRect *)rect
 
     [self _proceedWithSession:viewController.session
              selectedActivity:activity
+           authenticationOnly:NO
      presentingViewController:self.presentingViewController
             popoverController:self.popoverController];
 }
@@ -1184,11 +1205,17 @@ willPresentViewController:(UIViewController *)viewController
         session.activityCompletionHandler(selectedActivity, successful, error);
     }
 
+    if (controller.authenticationOnly)
+    {
+        if (session.presentationEndingHandler) {
+            session.presentationEndingHandler(OSKPresentationEnding_Authenticated, selectedActivity);
+        }
+    }
     // This check is not strictly necessary, since in practice the activity sheets are
     // always dismissed when the activity *begins* to perform, or earlier (on iPad).
     // In the interests of future changes, we'll check for a need to dismiss the activity
     // sheet here.
-    if ([self isPresenting] && [session.sessionIdentifier isEqualToString:self.activitySheetViewController.session.sessionIdentifier]) {
+    else if ([self isPresenting] && [session.sessionIdentifier isEqualToString:self.activitySheetViewController.session.sessionIdentifier]) {
         [self dismissActivitySheet:^{
             if (session.presentationEndingHandler) {
                 session.presentationEndingHandler(OSKPresentationEnding_ProceededWithActivity, selectedActivity);

@@ -61,7 +61,8 @@
 
 #pragma mark - Tapped Activity Flow
 
-- (void)start {
+- (void)startWithAuthenticationOnly:(BOOL)authenticationOnly {
+    self.authenticationOnly = authenticationOnly;
     [self handlePurchasingStepForActivity:self.activity];
 }
 
@@ -126,6 +127,7 @@
                     NSArray *systemAccounts = [accountStore accountsForAccountTypeIdentifier:systemAccountTypeIdentifier];
                     if (systemAccounts.count > 0) {
                         ACAccount *account = [systemAccounts firstObject];
+                        [accountStore setLastUsedAccountIdentifier:account.identifier forType:systemAccountTypeIdentifier]; // Explicitly setting it so the delegate gets notified --Sam
                         [theActivity setActiveSystemAccount:account];
                         [weakSelf handlePublishingStepForActivity:activity];
                     } else {
@@ -181,6 +183,7 @@
                        if (account == nil) {
                            account = [systemAccounts firstObject];
                        }
+                       [accountStore setLastUsedAccountIdentifier:account.identifier forType:systemAccountTypeIdentifier]; // Explicitly setting it so the delegate gets notified --Sam
                        [activity setActiveSystemAccount:account];
                        [weakSelf handlePublishingStepForActivity:activity];
                    }
@@ -227,7 +230,15 @@
             isFirstAccount = NO;
         }
     }
-    [self handlePublishingStepForActivity:activity];
+    if (!self.authenticationOnly)
+    {
+        [self handlePublishingStepForActivity:activity];
+    }
+    else
+    {
+        [self dismissViewControllers];
+        [self.delegate sessionControllerDidFinish:self successful:YES error:nil];
+    }
 }
 
 - (void)handleManagedAccountAuthenticationStepForActivity:(OSKActivity *)activity {
@@ -262,7 +273,7 @@
         [self handlePublishingStepForActivity:theActivity];
     } else {
         __weak OSKSessionController *weakSelf = self;
-        [theActivity authenticate:^(BOOL successful, NSError *error) {
+        [theActivity authenticate:^(BOOL successful, BOOL fromCache, NSError *error) {
             if (successful) {
                 [weakSelf handlePublishingStepForActivity:theActivity];
             } else {

@@ -24,7 +24,7 @@ static NSString * OSKManagedAccountStoreSavedActiveAccountIDsKey = @"OSKManagedA
 
 @implementation OSKManagedAccountStore
 
-+ (id)sharedInstance {
++ (instancetype)sharedInstance {
     static dispatch_once_t once;
     static OSKManagedAccountStore * sharedInstance;
     dispatch_once(&once, ^ { sharedInstance = [[self alloc] init]; });
@@ -142,6 +142,10 @@ static NSString * OSKManagedAccountStoreSavedActiveAccountIDsKey = @"OSKManagedA
                                          forKey:OSKManagedAccountStoreSavedActiveAccountIDsKey
                                      completion:nil
                                 completionQueue:nil];
+    if ([self.delegate respondsToSelector:@selector(managedAccountStore:didSetActiveAccount:forActivityType:)])
+    {
+        [self.delegate managedAccountStore:self didSetActiveAccount:account forActivityType:activityType];
+    }
 }
 
 - (NSMutableDictionary *)_loadSavedActiveAccountIDs {

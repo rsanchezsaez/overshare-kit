@@ -13,6 +13,7 @@
 typedef NS_ENUM(NSInteger, OSKPresentationEnding) {
     OSKPresentationEnding_Cancelled,
     OSKPresentationEnding_ProceededWithActivity,
+    OSKPresentationEnding_Authenticated
 };
 
 typedef void(^OSKPresentationEndingHandler)(OSKPresentationEnding presentationEnding, OSKActivity *activityOrNil);

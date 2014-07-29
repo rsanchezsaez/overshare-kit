@@ -19,7 +19,7 @@
 
 + (instancetype)sharedInstance {
     static dispatch_once_t once;
-    static OSKManagedAccountStore * sharedInstance;
+    static OSKAccountStore * sharedInstance;
     dispatch_once(&once, ^ { sharedInstance = [[self alloc] init]; });
     return sharedInstance;
 }

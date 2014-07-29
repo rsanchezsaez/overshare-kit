@@ -89,6 +89,11 @@ static NSString * OSKSystemAccountStoreSavedActiveAccountIDsKey = @"OSKSystemAcc
                                          forKey:OSKSystemAccountStoreSavedActiveAccountIDsKey
                                      completion:nil
                                 completionQueue:nil];
+    if ([self.delegate respondsToSelector:@selector(systemAccountStore:didSetLastUsedAccount:forType:)])
+    {
+        ACAccount *account = [self accountWithIdentifier:identifier forType:accountTypeIdentifier];
+        [self.delegate systemAccountStore:self didSetLastUsedAccount:account forType:accountTypeIdentifier];
+    }
 }
 
 - (void)_loadSavedActiveAccountIDs {
@@ -99,26 +104,45 @@ static NSString * OSKSystemAccountStoreSavedActiveAccountIDsKey = @"OSKSystemAcc
     }
 }
 
-- (ACAccount *)lastUsedAccountForType:(NSString *)accountTypeIdentifier {
-    NSParameterAssert(accountTypeIdentifier);
-    
-    NSArray *existingAccounts = [self accountsForAccountTypeIdentifier:accountTypeIdentifier];
-    NSString *lastUsedAccountID = [self lastUsedAccountIdentifierForType:accountTypeIdentifier];
-    
+- (ACAccount *)_findAccountWithIdentifier:(NSString *)identifier inArray:(NSArray *)existingAccounts
+{
     ACAccount *account = nil;
-    if (existingAccounts.count > 0) {
+    if (identifier) {
         for (ACAccount *anAccount in existingAccounts) {
-            if ([anAccount.identifier isEqualToString:lastUsedAccountID]) {
+            if ([anAccount.identifier isEqualToString:identifier]) {
                 account = anAccount;
                 break;
             }
         }
-        if (account == nil) {
-            account = [existingAccounts firstObject];
-        }
+    }
+    return account;
+}
+
+- (ACAccount *)accountWithIdentifier:(NSString *)identifier forType:(NSString *)accountTypeIdentifier
+{
+    NSArray *existingAccounts = [self accountsForAccountTypeIdentifier:accountTypeIdentifier];
+    
+    ACAccount *account = [self _findAccountWithIdentifier:identifier inArray:existingAccounts];
+    if (account == nil) {
+        account = [existingAccounts firstObject];
     }
     
     return account;
+}
+
+- (ACAccount *)lastUsedAccountForType:(NSString *)accountTypeIdentifier {
+    NSParameterAssert(accountTypeIdentifier);
+    NSString *lastUsedAccountID = [self lastUsedAccountIdentifierForType:accountTypeIdentifier];    
+    return [self accountWithIdentifier:lastUsedAccountID forType:accountTypeIdentifier];
+}
+
+- (BOOL)isLastUsedAccountValidForType:(NSString *)accountTypeIdentifier {
+    NSArray *existingAccounts = [self accountsForAccountTypeIdentifier:accountTypeIdentifier];
+    NSString *lastUsedAccountID = [self lastUsedAccountIdentifierForType:accountTypeIdentifier];
+    ACAccount *account = [self _findAccountWithIdentifier:lastUsedAccountID inArray:existingAccounts];
+    
+    return (account != nil);
+
 }
 
 @end

@@ -37,6 +37,8 @@ willPresentSystemViewController:(UIViewController *)systemViewController;
 
 @interface OSKSessionController : NSObject
 
+@property (assign, nonatomic, readwrite) BOOL authenticationOnly;
+
 // OSKSessionController should be used via one of its concrete subclasses, OSKSessionController_Phone or OSKSessionController_Pad.
 
 - (instancetype)initWithActivity:(OSKActivity *)activity
@@ -47,7 +49,7 @@ willPresentSystemViewController:(UIViewController *)systemViewController;
 @property (weak, nonatomic, readonly) id <OSKSessionControllerDelegate> delegate;
 @property (strong, nonatomic, readonly) OSKActivity *activity;
 
-- (void)start;
+- (void)startWithAuthenticationOnly:(BOOL)authenticationOnly;
 
 @end
 

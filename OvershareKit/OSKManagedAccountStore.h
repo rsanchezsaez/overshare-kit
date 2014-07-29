@@ -9,6 +9,15 @@
 @import Foundation;
 
 @class OSKManagedAccount;
+@class OSKManagedAccountStore;
+
+@protocol OSKManagedAccountStoreDelegate <NSObject>
+
+@optional
+
+- (void)managedAccountStore:(OSKManagedAccountStore *)store didSetActiveAccount:(OSKManagedAccount *)account forActivityType:(NSString *)activityType;
+
+@end
 
 ///-----------------------------------------------
 /// @name Managed Account Store
@@ -20,10 +29,12 @@
  */
 @interface OSKManagedAccountStore : NSObject
 
+@property (nonatomic, weak) id<OSKManagedAccountStoreDelegate> delegate;
+
 /**
  @return Returns the singleton instance.
  */
-+ (id)sharedInstance;
++ (instancetype)sharedInstance;
 
 /**
  Gets the accounts associated with a given activityType.

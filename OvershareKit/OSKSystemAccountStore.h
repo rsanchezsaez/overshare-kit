@@ -11,6 +11,16 @@
 
 #import "OSKActivity_SystemAccounts.h"
 
+@class OSKSystemAccountStore;
+
+@protocol OSKSystemAccountStoreDelegate <NSObject>
+
+@optional
+
+- (void)systemAccountStore:(OSKSystemAccountStore *)store didSetLastUsedAccount:(ACAccount *)account forType:(NSString *)accountTypeIdentifier;
+
+@end
+
 ///-----------------------------------------------
 /// @name System Account Store
 ///-----------------------------------------------
@@ -20,6 +30,8 @@
  manages access to iOS' Accounts API
  */
 @interface OSKSystemAccountStore : NSObject
+
+@property (nonatomic, weak) id<OSKSystemAccountStoreDelegate> delegate;
 
 /**
  @return Returns the singleton instance.
@@ -94,6 +106,13 @@
  @param accountTypeIdentifier The iOS account type identifier (See ACAccountType.h)
  */
 - (ACAccount *)lastUsedAccountForType:(NSString *)accountTypeIdentifier;
+
+/**
+ Returns YES if the last used account has been set; Returns NO if it has not been set or there are no accounts.
+ 
+ @param accountTypeIdentifier The iOS account type identifier (See ACAccountType.h)
+ */
+- (BOOL)isLastUsedAccountValidForType:(NSString *)accountTypeIdentifier;
 
 @end
 
