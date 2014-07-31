@@ -117,6 +117,8 @@ static NSString * OSKFacebookActivity_PreviousAudienceKey = @"OSKFacebookActivit
 }
 
 - (BOOL)isReadyToPerform {
+    BOOL isReadyToPerform = [super isReadyToPerform];
+
     BOOL accountPresent = (self.activeSystemAccount != nil);
     
     OSKFacebookContentItem *contentItem = (OSKFacebookContentItem *)[self contentItem];
@@ -128,7 +130,7 @@ static NSString * OSKFacebookActivity_PreviousAudienceKey = @"OSKFacebookActivit
     BOOL isALinkPost = (contentItem.link != nil);
     BOOL hasImageAttachment = [contentItem.images count] > 0;
     
-    return (accountPresent && (textIsValid || isALinkPost || hasImageAttachment));
+    return (isReadyToPerform && accountPresent && (textIsValid || isALinkPost || hasImageAttachment));
 }
 
 - (void)performActivity:(OSKActivityCompletionHandler)completion {

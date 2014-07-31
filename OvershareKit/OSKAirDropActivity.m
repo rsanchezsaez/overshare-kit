@@ -66,7 +66,9 @@
 }
 
 - (BOOL)isReadyToPerform {
-    return ([self airdropItem].items.count > 0);
+    BOOL isReadyToPerform = [super isReadyToPerform];
+
+    return (isReadyToPerform && [self airdropItem].items.count > 0);
 }
 
 - (void)performActivity:(OSKActivityCompletionHandler)completion {

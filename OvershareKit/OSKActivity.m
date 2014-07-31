@@ -10,6 +10,7 @@
 
 #import "OSKActivitiesManager.h"
 #import "OSKApplicationCredential.h"
+#import "OSKShareableContentItem.h"
 
 // ACTIVITY OPTIONS
 NSString * const OSKActivityOption_ExcludedTypes = @"OSKActivityOption_ExcludedTypes";
@@ -139,8 +140,7 @@ NSString * const OSKActivityType_SDK_Pocket = @"OSKActivityType_SDK_Pocket";
 }
 
 - (BOOL)isReadyToPerform {
-    NSAssert(NO, @"OSKActivity subclasses must override `isReadyToPerform` without calling super.");
-    return NO;
+    return self.contentItem.isContentItemReady;
 }
 
 - (void)performActivity:(OSKActivityCompletionHandler)completion {

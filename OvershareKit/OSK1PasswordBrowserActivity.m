@@ -72,9 +72,11 @@
 }
 
 - (BOOL)isReadyToPerform {
+    BOOL isReadyToPerform = [super isReadyToPerform];
+
     NSURL *sourceURL = [(OSKWebBrowserContentItem *)self.contentItem url];
     NSString *scheme = [sourceURL scheme].lowercaseString;
-    return ([scheme isEqualToString:@"http"] || [scheme isEqualToString:@"https"]);
+    return (isReadyToPerform && ([scheme isEqualToString:@"http"] || [scheme isEqualToString:@"https"]));
 }
 
 - (void)performActivity:(OSKActivityCompletionHandler)completion {

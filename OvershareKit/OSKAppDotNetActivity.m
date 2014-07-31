@@ -106,6 +106,8 @@ static NSInteger OSKAppDotNetActivity_MaxImageCount = 4;
 }
 
 - (BOOL)isReadyToPerform {
+    BOOL isReadyToPerform = [super isReadyToPerform];
+
     BOOL appCredentialPreset = ([self.class applicationCredential] != nil);
     BOOL credentialPresent = (self.activeManagedAccount.credential != nil);
     BOOL accountPresent = (self.activeManagedAccount != nil);
@@ -113,7 +115,7 @@ static NSInteger OSKAppDotNetActivity_MaxImageCount = 4;
     NSInteger maxCharacterCount = [self maximumCharacterCount];
     BOOL textIsValid = (0 <= self.remainingCharacterCount && self.remainingCharacterCount < maxCharacterCount);
     
-    return (appCredentialPreset && credentialPresent && accountPresent && textIsValid);
+    return (isReadyToPerform && appCredentialPreset && credentialPresent && accountPresent && textIsValid);
 }
 
 - (void)performActivity:(OSKActivityCompletionHandler)completion {

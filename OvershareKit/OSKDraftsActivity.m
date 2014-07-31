@@ -93,7 +93,9 @@ static NSString * OSKDraftsActivity_QueryKey_Text = @"text";
 }
 
 - (BOOL)isReadyToPerform {
-    return ([self textEditingItem].text.length > 0);
+    BOOL isReadyToPerform = [super isReadyToPerform];
+
+    return (isReadyToPerform && [self textEditingItem].text.length > 0);
 }
 
 - (void)performActivity:(OSKActivityCompletionHandler)completion {

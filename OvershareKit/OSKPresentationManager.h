@@ -187,6 +187,11 @@ extern NSString * const OSKPresentationOption_PresentationEndingHandler;
  */
 - (UIViewController <OSKPublishingViewController> *)publishingViewControllerForActivity:(OSKActivity *)activity;
 
+/**
+ Update current publishingViewController (if any) "Done" button.
+ */
+- (void)updateCurrentPublishingViewController;
+
 @end
 
 ///-----------------------------------------------

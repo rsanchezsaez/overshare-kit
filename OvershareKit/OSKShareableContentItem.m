@@ -29,6 +29,7 @@ NSString * const OSKShareableContentItemType_TextEditing = @"OSKShareableContent
     self = [super init];
     if (self) {
         _userInfo = [[NSMutableDictionary alloc] init];
+        self.isContentItemReady = YES;
     }
     return self;
 }

@@ -94,11 +94,13 @@ static NSInteger OSKTencentWeiboActivity_FallbackShortURLEstimate = 24;
 }
 
 - (BOOL)isReadyToPerform {
+    BOOL isReadyToPerform = [super isReadyToPerform];
+
     BOOL appCredentialPresent = ([self.class applicationCredential] != nil);
     BOOL accountPresent = (self.activeSystemAccount != nil);
     BOOL textIsValid = (0 <= self.remainingCharacterCount && self.remainingCharacterCount < [self maximumCharacterCount]);
     
-    return (appCredentialPresent && accountPresent && textIsValid);
+    return (isReadyToPerform && appCredentialPresent && accountPresent && textIsValid);
 }
 
 - (void)performActivity:(OSKActivityCompletionHandler)completion {

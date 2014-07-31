@@ -63,6 +63,8 @@ static NSInteger OSKTextViewFontSize_Pad = 20.0f;
 @property (strong, nonatomic, readwrite) OSKActivitySheetViewController *activitySheetViewController;
 @property (assign, nonatomic, readwrite) BOOL isAnimating;
 
+@property (  weak, nonatomic) UIViewController <OSKPublishingViewController> *currentlyShownPublishingViewController;
+
 // IPHONE
 @property (strong, nonatomic) UIView *shadowView;
 @property (strong, nonatomic) UIViewController *presentingViewController;
@@ -1155,7 +1157,15 @@ willRepositionPopoverToRect:(inout CGRect *)rect
                 break;
         }
     }
+    self.currentlyShownPublishingViewController = viewController;
     return viewController;
+}
+
+- (void)updateCurrentPublishingViewController {
+    if ([self.currentlyShownPublishingViewController respondsToSelector:@selector(updateDoneButton)])
+    {
+        [self.currentlyShownPublishingViewController performSelector:@selector(updateDoneButton)];
+    }
 }
 
 #pragma mark - Flow Controller Delegate

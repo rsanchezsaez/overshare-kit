@@ -72,7 +72,9 @@
 }
 
 - (BOOL)isReadyToPerform {
-    return (self.photoSharingItem.images ? YES : NO);
+    BOOL isReadyToPerform = [super isReadyToPerform];
+
+    return (isReadyToPerform && (self.photoSharingItem.images ? YES : NO));
 }
 
 - (void)performActivity:(OSKActivityCompletionHandler)completion {

@@ -67,7 +67,9 @@
 }
 
 - (BOOL)isReadyToPerform {
-    return ([[UIApplication sharedApplication] canOpenURL:[self browserItem].url]);
+    BOOL isReadyToPerform = [super isReadyToPerform];
+
+    return (isReadyToPerform && [[UIApplication sharedApplication] canOpenURL:[self browserItem].url]);
 }
 
 - (void)performActivity:(OSKActivityCompletionHandler)completion {

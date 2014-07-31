@@ -98,6 +98,8 @@ static NSInteger OSKTumblrActivity_MaxImageCount = 0;
 }
 
 - (BOOL)isReadyToPerform {
+    BOOL isReadyToPerform = [super isReadyToPerform];
+
     BOOL appCredentialPresent = ([self.class applicationCredential] != nil);
     BOOL credentialPresent = (self.activeManagedAccount.credential != nil);
     BOOL accountPresent = (self.activeManagedAccount != nil);
@@ -105,7 +107,7 @@ static NSInteger OSKTumblrActivity_MaxImageCount = 0;
     NSInteger maxCharacterCount = [self maximumCharacterCount];
     BOOL textIsValid = (0 <= self.remainingCharacterCount && self.remainingCharacterCount < maxCharacterCount);
     
-    return (appCredentialPresent && credentialPresent && accountPresent && textIsValid);
+    return (isReadyToPerform && appCredentialPresent && credentialPresent && accountPresent && textIsValid);
 }
 
 - (void)performActivity:(OSKActivityCompletionHandler)completion {

@@ -101,7 +101,9 @@ static NSString * OSKChromeActivity_URLQueryKey = @"url";
 }
 
 - (BOOL)isReadyToPerform {
-    return ([(OSKWebBrowserContentItem *)self.contentItem url] != nil);
+    BOOL isReadyToPerform = [super isReadyToPerform];
+
+    return (isReadyToPerform && [(OSKWebBrowserContentItem *)self.contentItem url] != nil);
 }
 
 - (void)performActivity:(OSKActivityCompletionHandler)completion {

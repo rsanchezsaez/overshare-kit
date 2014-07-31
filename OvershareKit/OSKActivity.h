@@ -57,6 +57,7 @@ extern NSString * const OSKActivityType_SDK_Pocket;
 @class OSKActivityOperation;
 @class OSKApplicationCredential;
 @class OSKShareableContentItem;
+@protocol OSKPublishingViewController;
 
 typedef void(^OSKActivityCompletionHandler)(OSKActivity *activity, BOOL successful, NSError *error);
 

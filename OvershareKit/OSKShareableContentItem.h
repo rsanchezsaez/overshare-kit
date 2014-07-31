@@ -58,6 +58,11 @@ extern NSString * const OSKShareableContentItemType_TextEditing;
 @property (strong, nonatomic) UIImage *alternateActivityIcon;
 
 /**
+ Content item ready defaults to YES. Set it to NO before presenting Activity Sheet if you want to perform async operations and complete some contentItem fields later.
+ */
+@property (nonatomic) BOOL isContentItemReady;
+
+/**
  Returns either one of the officially supported item types listed above,
  or a custom item type.
  

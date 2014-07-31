@@ -62,7 +62,9 @@
 }
 
 - (BOOL)isReadyToPerform {
-    return [(OSKSMSContentItem *)self.contentItem body].length > 0 || [(OSKSMSContentItem *)self.contentItem attachments].count;
+    BOOL isReadyToPerform = [super isReadyToPerform];
+
+    return (isReadyToPerform && ([(OSKSMSContentItem *)self.contentItem body].length > 0 || [(OSKSMSContentItem *)self.contentItem attachments].count));
 }
 
 - (void)performActivity:(OSKActivityCompletionHandler)completion {

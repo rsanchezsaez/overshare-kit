@@ -97,7 +97,9 @@
 }
 
 - (BOOL)isReadyToPerform {
-    return ([self readLaterItem].url != nil && [[PocketAPI sharedAPI] isLoggedIn]);
+    BOOL isReadyToPerform = [super isReadyToPerform];
+
+    return (isReadyToPerform && [self readLaterItem].url != nil && [[PocketAPI sharedAPI] isLoggedIn]);
 }
 
 - (void)performActivity:(OSKActivityCompletionHandler)completion {

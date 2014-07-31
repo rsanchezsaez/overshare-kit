@@ -72,7 +72,9 @@
 }
 
 - (BOOL)isReadyToPerform {
-    return [(OSKPasswordManagementAppSearchContentItem *)self.contentItem query].length > 0;
+    BOOL isReadyToPerform = [super isReadyToPerform];
+
+    return (isReadyToPerform && [(OSKPasswordManagementAppSearchContentItem *)self.contentItem query].length > 0);
 }
 
 - (void)performActivity:(OSKActivityCompletionHandler)completion {

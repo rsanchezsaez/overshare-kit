@@ -89,7 +89,10 @@
 }
 
 - (BOOL)isReadyToPerform {
-    return ([self linkBookmarkItem].url.absoluteString.length > 0
+    BOOL isReadyToPerform = [super isReadyToPerform];
+
+    return (isReadyToPerform
+            && [self linkBookmarkItem].url.absoluteString.length > 0
             && self.activeManagedAccount.credential.accountID != nil
             && self.activeManagedAccount.credential.token != nil);
 }

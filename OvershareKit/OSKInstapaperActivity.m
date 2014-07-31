@@ -92,7 +92,9 @@
 }
 
 - (BOOL)isReadyToPerform {
-    return ([self readLaterItem].url && self.activeManagedAccount.credential);
+    BOOL isReadyToPerform = [super isReadyToPerform];
+
+    return (isReadyToPerform && [self readLaterItem].url && self.activeManagedAccount.credential);
 }
 
 - (void)performActivity:(OSKActivityCompletionHandler)completion {

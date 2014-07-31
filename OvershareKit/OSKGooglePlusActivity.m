@@ -115,12 +115,14 @@ static NSInteger OSKGooglePlusActivity_MaxImageCount = 3;
 }
 
 - (BOOL)isReadyToPerform {
+    BOOL isReadyToPerform = [super isReadyToPerform];
+
     BOOL accountPresent = ([[GPPSignIn sharedInstance] authentication] != nil);
 
     NSInteger maxCharacterCount = [self maximumCharacterCount];
     BOOL textIsValid = (0 <= self.remainingCharacterCount && self.remainingCharacterCount < maxCharacterCount);
 
-    return (accountPresent && textIsValid);
+    return (isReadyToPerform && accountPresent && textIsValid);
 }
 
 - (NSInteger)updateRemainingCharacterCount:(OSKMicroblogPostContentItem *)contentItem urlEntities:(NSArray *)urlEntities {

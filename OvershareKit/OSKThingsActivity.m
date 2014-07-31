@@ -74,7 +74,9 @@ static NSString * OSKThingsActivity_AddEntryWithNoteURL = @"add?title=%@&notes=%
 }
 
 - (BOOL)isReadyToPerform {
-    return [(OSKToDoListEntryContentItem *)self.contentItem title].length > 0;
+    BOOL isReadyToPerform = [super isReadyToPerform];
+
+    return (isReadyToPerform && [(OSKToDoListEntryContentItem *)self.contentItem title].length > 0);
 }
 
 - (void)performActivity:(OSKActivityCompletionHandler)completion {

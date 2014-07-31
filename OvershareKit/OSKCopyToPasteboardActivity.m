@@ -68,7 +68,9 @@
 }
 
 - (BOOL)isReadyToPerform {
-    return (self.pasteboardItem.text.length > 0 || self.pasteboardItem.images.count);
+    BOOL isReadyToPerform = [super isReadyToPerform];
+
+    return (isReadyToPerform && (self.pasteboardItem.text.length > 0 || self.pasteboardItem.images.count));
 }
 
 - (void)performActivity:(OSKActivityCompletionHandler)completion {

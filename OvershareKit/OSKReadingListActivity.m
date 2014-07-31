@@ -71,11 +71,13 @@
 }
 
 - (BOOL)isReadyToPerform {
+    BOOL isReadyToPerform = [super isReadyToPerform];
+
     BOOL isReady = NO;
     if ([self readLaterItem].url != nil) {
         isReady = [SSReadingList supportsURL:[self readLaterItem].url];
     }
-    return isReady;
+    return isReadyToPerform && isReady;
 }
 
 - (void)performActivity:(OSKActivityCompletionHandler)completion {

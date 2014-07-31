@@ -93,11 +93,13 @@ static NSInteger OSKSinaWeiboActivity_MaxImageCount = 1;
 }
 
 - (BOOL)isReadyToPerform {
+    BOOL isReadyToPerform = [super isReadyToPerform];
+
 
     BOOL accountPresent = (self.activeSystemAccount != nil);
     BOOL textIsValid = (0 <= self.remainingCharacterCount && self.remainingCharacterCount < [self maximumCharacterCount]);
     
-    return (accountPresent && textIsValid);
+    return (isReadyToPerform && accountPresent && textIsValid);
 }
 
 - (void)performActivity:(OSKActivityCompletionHandler)completion {
