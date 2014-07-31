@@ -14,6 +14,8 @@
 #import "OSKSystemAccountStore.h"
 #import "OSKLogger.h"
 
+#import <AnimatedGIFImageSerialization/AnimatedGIFImageSerialization.h>
+
 #define kTwoWeeks (14 * 24 * 60 * 60)
 #define kOSKTwitterConfigurationCache		@"OSKTwitterConfigurationCachePref"
 #define kOSKTwitterConfigurationCacheDate	@"OSKTwitterConfigurationCacheDatePref"
@@ -226,18 +228,66 @@ NSString * const OSKTwitterImageSizeLimitKey = @"photo_size_limit";
     SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeTwitter requestMethod:SLRequestMethodPOST URL:twitterApiURL parameters:params];
     
     for (UIImage *image in item.images) {
-		float quality = 1.0f;
-        NSData *imageData = UIImageJPEGRepresentation(image, quality);
-		
-		//SLIGHT HACK WARNING:
-		//We have the photo size limit from Twitter, and to make sure we are under the size requirement, we will degrade the JPEG quality
-		//by 10% successively until we are under the limit. -@cheesemaker
-		while (photoSizeLimit && (imageData.length > photoSizeLimit) && (quality > 0.0f)) {
-			quality -= 0.1f;
-			imageData = UIImageJPEGRepresentation(image, quality);
+        NSData *imageData = nil;
+        if ([image respondsToSelector:@selector(isAnimatedGIF)] && image.isAnimatedGIF) {
+            imageData = [AnimatedGIFImageSerialization animatedGIFDataWithImage:image
+                                                                               duration:1.0
+                                                                              loopCount:1
+                                                                                  error:nil];
+        }
+        else {
+            float quality = 1.0f;
+            imageData = UIImageJPEGRepresentation(image, quality);
+            
+            //SLIGHT HACK WARNING:
+            //We have the photo size limit from Twitter, and to make sure we are under the size requirement, we will degrade the JPEG quality
+            //by 10% successively until we are under the limit. -@cheesemaker
+            while (photoSizeLimit && (imageData.length > photoSizeLimit) && (quality > 0.0f)) {
+                quality -= 0.1f;
+                imageData = UIImageJPEGRepresentation(image, quality);
+            }
 		}
 			
-        [request addMultipartData:imageData withName:@"media[]" type:@"image/jpeg" filename:@"image.jpg"];
+        if (imageData && imageData.length <= photoSizeLimit)
+        {
+            [request addMultipartData:imageData withName:@"media[]" type:@"image/jpeg" filename:@"image.jpg"];
+        }
+//        {
+//            // Trying to supply minimum viable JPG when data over limit...
+//            // But doesn't work
+//            const char minimumValidJPG[] = {
+//                0xff, 0xd8, // SOI
+//                0xff, 0xdb, // DQT
+//                0x00, 0x43,
+//                0x00,
+//                0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01,
+//                0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01,
+//                0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01,
+//                0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01,
+//                0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01,
+//                0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01,
+//                0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01,
+//                0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01,
+//                0xff, 0xc2, // SOF
+//                0x00, 0x0b,
+//                0x08, 0x00, 0x01, 0x00, 0x01, 0x01, 0x01, 0x11, 0x00,
+//                0xff, 0xc4, // DHT
+//                0x00, 0x14,
+//                0x00,
+//                0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+//                0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+//                0x03,
+//                0xff, 0xda, // SOS
+//                0x00, 0x08,
+//                0x01, 0x01, 0x00, 0x00, 0x00, 0x01, 0x3F,
+//                0xff, 0xd9 // EOI
+//            };
+//
+//            size_t minimumValidJPGLength = sizeof(minimumValidJPG);  // myArraySize = 3
+//            NSData *data = [NSData dataWithBytes:minimumValidJPG length:minimumValidJPGLength];
+//            //UIImage *newImage = [UIImage imageWithData:data];
+//            [request addMultipartData:data withName:@"media[]" type:@"image/jpeg" filename:@"image.jpg"];
+//        }
     }
     
     request.account = account;
