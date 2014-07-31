@@ -15,6 +15,8 @@
 #import "OSKManagedAccountCredential.h"
 #import "OSKShareableContentItem.h"
 
+#import <AnimatedGIFImageSerialization/AnimatedGIFImageSerialization.h>
+
 @implementation OSKSinaWeiboUtility
 
 #pragma mark - Write Post
@@ -97,7 +99,25 @@
     
     if ([item.images count] > 0) {
         UIImage *image = item.images[0];
-        [request addMultipartData:UIImageJPEGRepresentation(image, 1.0f) withName:@"pic" type:@"image/jpeg" filename:@"image.jpg"];
+        NSData *imageData = nil;
+        NSString *MIMEtype = nil;
+        NSString *remoteFilename = nil;
+        if ([image respondsToSelector:@selector(isAnimatedGIF)] && image.isAnimatedGIF) {
+            imageData = [AnimatedGIFImageSerialization animatedGIFDataWithImage:image
+                                                                       duration:1.0
+                                                                      loopCount:1
+                                                                          error:nil];
+            MIMEtype = @"image/gif";
+            remoteFilename = @"image.gif";
+        }
+        else
+        {
+            imageData = UIImageJPEGRepresentation(image, 1.0f);
+            MIMEtype = @"image/jpeg";
+            remoteFilename = @"image.jpg";
+        }
+
+        [request addMultipartData:imageData withName:@"pic" type:MIMEtype filename:remoteFilename];
     }
     
  	request.account = account;

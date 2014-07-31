@@ -229,11 +229,15 @@ NSString * const OSKTwitterImageSizeLimitKey = @"photo_size_limit";
     
     for (UIImage *image in item.images) {
         NSData *imageData = nil;
+        NSString *MIMEtype = nil;
+        NSString *remoteFilename = nil;
         if ([image respondsToSelector:@selector(isAnimatedGIF)] && image.isAnimatedGIF) {
             imageData = [AnimatedGIFImageSerialization animatedGIFDataWithImage:image
                                                                                duration:1.0
                                                                               loopCount:1
                                                                                   error:nil];
+            MIMEtype = @"image/gif";
+            remoteFilename = @"image.gif";
         }
         else {
             float quality = 1.0f;
@@ -246,11 +250,13 @@ NSString * const OSKTwitterImageSizeLimitKey = @"photo_size_limit";
                 quality -= 0.1f;
                 imageData = UIImageJPEGRepresentation(image, quality);
             }
+            MIMEtype = @"image/jpeg";
+            remoteFilename = @"image.jpg";
 		}
 			
         if (imageData && imageData.length <= photoSizeLimit)
         {
-            [request addMultipartData:imageData withName:@"media[]" type:@"image/jpeg" filename:@"image.jpg"];
+            [request addMultipartData:imageData withName:@"media[]" type:MIMEtype filename:remoteFilename];
         }
 //        {
 //            // Trying to supply minimum viable JPG when data over limit...

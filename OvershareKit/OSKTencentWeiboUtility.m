@@ -16,6 +16,8 @@
 #import "OSKApplicationCredential.h"
 #import "OSKShareableContentItem.h"
 
+#import <AnimatedGIFImageSerialization/AnimatedGIFImageSerialization.h>
+
 @interface UIImage (OSKFix)
 
 - (UIImage *)imageWithAppliedOrientation;
@@ -115,13 +117,33 @@
                                                parameters:postDictionary];
     
     if ([item.images count] > 0) {
-        // Tencent doesn't honor the image.imageOrientation EXIF flag
-        // so we have to redraw it just in case
-        UIImage *image = [item.images[0] imageWithAppliedOrientation];
-        [request addMultipartData:UIImageJPEGRepresentation(image, 1.0f) withName:@"pic" type:@"image/jpeg" filename:@"image.jpg"];
+        UIImage *image = item.images[0];
+        NSData *imageData = nil;
+        NSString *MIMEtype = nil;
+        NSString *remoteFilename = nil;
+        if ([image respondsToSelector:@selector(isAnimatedGIF)] && image.isAnimatedGIF) {
+            imageData = [AnimatedGIFImageSerialization animatedGIFDataWithImage:image
+                                                                       duration:1.0
+                                                                      loopCount:1
+                                                                          error:nil];
+            MIMEtype = @"image/gif";
+            remoteFilename = @"image.gif";
+        }
+        else
+        {
+            // Tencent doesn't honor the image.imageOrientation EXIF flag
+            // so we have to redraw it just in case
+            image = [item.images[0] imageWithAppliedOrientation];
+
+            imageData = UIImageJPEGRepresentation(image, 1.0f);
+            MIMEtype = @"image/jpeg";
+            remoteFilename = @"image.jpg";
+        }
+        
+        [request addMultipartData:imageData withName:@"pic" type:MIMEtype filename:remoteFilename];
     }
-    
- 	request.account = account;
+
+    request.account = account;
     [request performRequestWithHandler:requestHandler];
 
 }
