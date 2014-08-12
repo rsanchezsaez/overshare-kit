@@ -93,23 +93,20 @@ static UIBezierPath *clippingPath;
 }
 
 - (void)updateSystemExistingAccountsDescription {
-    NSArray *accounts = [[OSKSystemAccountStore sharedInstance] accountsForAccountTypeIdentifier:[_activityClass systemAccountTypeIdentifier]];
-    NSMutableString *detailText = nil;
-    if (accounts.count) {
-        detailText = [[NSMutableString alloc] init];
-        for (ACAccount *account in accounts) {
-            [detailText appendString:[account username]];
-            if (account != accounts.lastObject) {
-                [detailText appendFormat:@", "];
-            }
-        }
-    }
-    [self.detailTextLabel setText:detailText];
+    ACAccount *account = [[OSKSystemAccountStore sharedInstance] lastUsedAccountForType:[_activityClass systemAccountTypeIdentifier]];
+    [self.detailTextLabel setText:account ? account.username : nil];
 }
 
 - (void)updateGenericAccountDescription {
     if ([_genericActivity isAuthenticated]) {
-        [self.detailTextLabel setText:@"Connected"];
+        if ([_genericActivity respondsToSelector:@selector(username)])
+        {
+            [self.detailTextLabel setText:[_genericActivity username]];
+        }
+        else
+        {
+            [self.detailTextLabel setText:@"Connected"];
+        }
     } else {
         [self.detailTextLabel setText:nil];
     }

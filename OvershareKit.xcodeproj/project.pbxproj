@@ -123,6 +123,7 @@
 		BC105DAA195E0C8800B0448D /* NSString+OSK_UUID.m in Sources */ = {isa = PBXBuildFile; fileRef = BC105CB6195E0C8800B0448D /* NSString+OSK_UUID.m */; };
 		BC105DAB195E0C8800B0448D /* NSString+OSKDerp.m in Sources */ = {isa = PBXBuildFile; fileRef = BC105CB8195E0C8800B0448D /* NSString+OSKDerp.m */; };
 		BC105DAC195E0C8800B0448D /* OSKSmartPunctuation.m in Sources */ = {isa = PBXBuildFile; fileRef = BC105CBA195E0C8800B0448D /* OSKSmartPunctuation.m */; };
+		BC88A83B199AB95600330B69 /* OSKGenericAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC88A83A199AB95600330B69 /* OSKGenericAccountViewController.m */; };
 		BCB41D9E1987D1FE00A9BC9C /* OSKFacebookSDKActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = BCB41D9C1987D1FD00A9BC9C /* OSKFacebookSDKActivity.m */; };
 		BCE4615C196474DD0052B960 /* OSKAccountStore.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE4615B196474DD0052B960 /* OSKAccountStore.m */; };
 /* End PBXBuildFile section */
@@ -662,6 +663,8 @@
 		BC105D40195E0C8800B0448D /* GooglePlus-Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GooglePlus-Icon-60@2x.png"; sourceTree = "<group>"; };
 		BC105D41195E0C8800B0448D /* GooglePlus-Icon-76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GooglePlus-Icon-76.png"; sourceTree = "<group>"; };
 		BC105D42195E0C8800B0448D /* GooglePlus-Icon-76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GooglePlus-Icon-76@2x.png"; sourceTree = "<group>"; };
+		BC88A839199AB95600330B69 /* OSKGenericAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSKGenericAccountViewController.h; sourceTree = "<group>"; };
+		BC88A83A199AB95600330B69 /* OSKGenericAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSKGenericAccountViewController.m; sourceTree = "<group>"; };
 		BCB41D9C1987D1FD00A9BC9C /* OSKFacebookSDKActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSKFacebookSDKActivity.m; sourceTree = "<group>"; };
 		BCB41D9D1987D1FD00A9BC9C /* OSKFacebookSDKActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSKFacebookSDKActivity.h; sourceTree = "<group>"; };
 		BCE43FCF195E5019002751A4 /* OvershareKit-iOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "OvershareKit-iOS.h"; path = "OvershareKit/OvershareKit-iOS.h"; sourceTree = SOURCE_ROOT; };
@@ -1272,12 +1275,14 @@
 				BC105C45195E0C8800B0448D /* OSKAccountChooserViewController.m */,
 				BC105C46195E0C8800B0448D /* OSKAccountManagementViewController.h */,
 				BC105C47195E0C8800B0448D /* OSKAccountManagementViewController.m */,
-				BC105C48195E0C8800B0448D /* OSKPocketAccountViewController.h */,
-				BC105C49195E0C8800B0448D /* OSKPocketAccountViewController.m */,
 				BC105C4A195E0C8800B0448D /* OSKAccountTypeCell.h */,
 				BC105C4B195E0C8800B0448D /* OSKAccountTypeCell.m */,
 				BC105C4C195E0C8800B0448D /* OSKActivityToggleCell.h */,
 				BC105C4D195E0C8800B0448D /* OSKActivityToggleCell.m */,
+				BC88A839199AB95600330B69 /* OSKGenericAccountViewController.h */,
+				BC88A83A199AB95600330B69 /* OSKGenericAccountViewController.m */,
+				BC105C48195E0C8800B0448D /* OSKPocketAccountViewController.h */,
+				BC105C49195E0C8800B0448D /* OSKPocketAccountViewController.m */,
 			);
 			name = "Account Management";
 			sourceTree = "<group>";
@@ -1846,6 +1851,7 @@
 				BC105D5C195E0C8800B0448D /* OSKFacebookActivity.m in Sources */,
 				BC105DA5195E0C8800B0448D /* NSData+OSKDerp.m in Sources */,
 				BC105D69195E0C8800B0448D /* OSKThingsActivity.m in Sources */,
+				BC88A83B199AB95600330B69 /* OSKGenericAccountViewController.m in Sources */,
 				BC105DA2195E0C8800B0448D /* OSKInMemoryImageCache.m in Sources */,
 				BC105D48195E0C8800B0448D /* OSKActivity.m in Sources */,
 				BC105D51195E0C8800B0448D /* OSKGooglePlusActivity.m in Sources */,

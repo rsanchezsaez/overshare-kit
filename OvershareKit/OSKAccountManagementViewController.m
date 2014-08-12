@@ -15,6 +15,7 @@
 #import "OSKPocketAccountViewController.h"
 #import "OSKAccountTypeCell.h"
 #import "OSKActivityToggleCell.h"
+#import "OSKGenericAccountViewController.h"
 
 #import "OSK1PasswordSearchActivity.h"
 #import "OSK1PasswordBrowserActivity.h"
@@ -306,6 +307,10 @@ static NSString * OSKAccountManagementHeaderViewIdentifier = @"OSKAccountManagem
             || [activityClass authenticationMethod] == OSKAuthenticationMethod_SystemAccounts) {
             OSKAccountChooserViewController *chooser = [[OSKAccountChooserViewController alloc] initForManagingAccountsOfActivityClass:activityClass];
             [self.navigationController pushViewController:chooser animated:YES];
+        } else if ([activityClass authenticationMethod] == OSKAuthenticationMethod_Generic) {
+            OSKGenericAccountViewController *controller = [[OSKGenericAccountViewController alloc] initWithStyle:UITableViewStyleGrouped];
+            controller.activity = [activityClass new];
+            [self.navigationController pushViewController:controller animated:YES];
         } else {
             OSKPocketAccountViewController *pocketVC = [[OSKPocketAccountViewController alloc] initWithStyle:UITableViewStyleGrouped];
             [self.navigationController pushViewController:pocketVC animated:YES];

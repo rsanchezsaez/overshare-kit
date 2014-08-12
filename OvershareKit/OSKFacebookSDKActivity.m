@@ -31,6 +31,25 @@ static NSString * OSKFacebookSDKActivity_UserInfoKey = @"OSKFacebookSDKActivity_
 - (instancetype)initWithContentItem:(OSKShareableContentItem *)item {
     self = [super initWithContentItem:item];
     if (self) {
+        
+        if ([FBSession activeSession].state == FBSessionStateCreatedTokenLoaded)
+        {
+            // we have a cached token, so open the session
+            [[FBSession activeSession] openWithBehavior:FBSessionLoginBehaviorWithFallbackToWebView
+                                      completionHandler:^(FBSession *session, FBSessionState status, NSError *error)
+             {
+                 if (session.isOpen)
+                 {
+                     if (!self.userInfo)
+                     {
+                         // cached user info is missing, so trigger a new fetch
+                         [self getUserDetailsFromCache:YES completion:nil];
+                     }
+                 }
+                 // Do not call completion for other session states, like close
+             }];
+        }
+        
         NSString *previousAudience = [[NSUserDefaults standardUserDefaults] objectForKey:OSKFacebookActivity_PreviousAudienceKey];
         if (previousAudience) {
             if( ([previousAudience isEqualToString:ACFacebookAudienceEveryone]) ||
@@ -102,41 +121,40 @@ static NSString * OSKFacebookSDKActivity_UserInfoKey = @"OSKFacebookSDKActivity_
 }
 
 - (void)authenticate:(OSKGenericAuthenticationCompletionHandler)completion {
-    if ([FBSession activeSession].state == FBSessionStateCreatedTokenLoaded)
+    if ([self isAuthenticated])
     {
-        // we have a cached token, so open the session
-        [[FBSession activeSession] openWithBehavior:FBSessionLoginBehaviorWithFallbackToWebView
-                                  completionHandler:^(FBSession *session, FBSessionState status, NSError *error)
-         {
-             if (session.isOpen)
-             {
-                 if (!self.userInfo)
-                 {
-                     // cached user info is missing, so trigger a new fetch
-                     [self getUserDetailsFromCache:YES completion:completion];
-                 }
-                 else
-                 {
-                     if (completion)
-                     {
-                         completion(!error, YES, error);
-                     }
-                 }
-             }
-             // Do not call completion for other session states, like close
-         }];
-    }
-    else
-    {
-        // create a new facebook session
-        FBSession *fbSession = [[FBSession alloc] initWithPermissions:@[ @"public_profile", @"user_friends" ]];
-        [FBSession setActiveSession:fbSession];
-        [fbSession openWithBehavior:FBSessionLoginBehaviorWithFallbackToWebView
-                  completionHandler:^(FBSession *session, FBSessionState status, NSError *error)
+        if (completion)
         {
-            [self getUserDetailsFromCache:NO completion:completion];
-        }];
+            completion(YES, YES, nil);
+        }
+        return;
     }
+    
+    // create a new facebook session
+    FBSession *fbSession = [[FBSession alloc] initWithPermissions:@[ @"public_profile", @"user_friends" ]];
+    [FBSession setActiveSession:fbSession];
+    [fbSession openWithBehavior:FBSessionLoginBehaviorWithFallbackToWebView
+              completionHandler:^(FBSession *session, FBSessionState status, NSError *error)
+    {
+        [self getUserDetailsFromCache:NO completion:completion];
+    }];
+}
+
+- (void)deauthenticate:(OSKGenericDeauthenticationCompletionHandler)completion
+{
+    [[FBSession activeSession] closeAndClearTokenInformation];
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:OSKFacebookSDKActivity_UserInfoKey];
+    if (completion)
+    {
+        completion(YES, nil);
+    }
+}
+
+- (NSString *)username
+{
+    if (![self isAuthenticated]) return nil;
+    
+    return self.userInfo[@"name"];
 }
 
 - (void)requestPublishPermissionsWithCompletion:(OSKGenericAuthenticationCompletionHandler)completionBlock

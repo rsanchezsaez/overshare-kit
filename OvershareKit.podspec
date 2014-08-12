@@ -20,8 +20,8 @@ Pod::Spec.new do |s|
   s.ios.vendored_frameworks = 'Dependencies/GooglePlus-SDK/GooglePlus.framework', 'Dependencies/GooglePlus-SDK/GoogleOpenSource.framework'
   
   s.dependency 'ADNLogin'
+  s.dependency 'AnimatedGIFImageSerialization'
   s.dependency 'Facebook-iOS-SDK'
-
   s.dependency 'PocketAPI'
   s.dependency 'TMTumblrSDK', '1.0.9-oe'
 end

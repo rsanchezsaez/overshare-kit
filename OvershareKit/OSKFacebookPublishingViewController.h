@@ -11,4 +11,6 @@
 
 @interface OSKFacebookPublishingViewController : UIViewController <OSKPublishingViewController>
 
+- (void)updateDoneButton;
+
 @end

@@ -10,6 +10,7 @@
 // for example the Pocket API, which handles authentication via an opaque SDK.
 
 typedef void(^OSKGenericAuthenticationCompletionHandler)(BOOL successful, BOOL fromCache, NSError *error);
+typedef void(^OSKGenericDeauthenticationCompletionHandler)(BOOL successful, NSError *error);
 
 ///------------------------------
 /// @name Generic Authentication
@@ -37,6 +38,12 @@ typedef void(^OSKGenericAuthenticationCompletionHandler)(BOOL successful, BOOL f
  it was successful.
  */
 - (void)authenticate:(OSKGenericAuthenticationCompletionHandler)completion;
+
+@optional
+
+- (NSString *)username;
+
+- (void)deauthenticate:(OSKGenericDeauthenticationCompletionHandler)completion;
 
 @end
 
