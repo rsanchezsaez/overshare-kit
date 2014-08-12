@@ -312,6 +312,16 @@ typedef NS_ENUM(NSInteger, OSKPublishingMethod) {
  */
 + (UIImage *)settingsIcon;
 
+/**
+ Optional method to let the activity know that it was not selected so it can perform any needed cleanup
+ */
+- (void)prepareForDisposal;
+
+/**
+ Optional method to let the activity that it can be resued after wasNotSelected cleanup
+ */
+- (void)prepareForReuse;
+
 @end;
 
 

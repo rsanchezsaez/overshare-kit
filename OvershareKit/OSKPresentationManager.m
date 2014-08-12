@@ -1235,6 +1235,7 @@ willPresentViewController:(UIViewController *)viewController
 }
 
 - (void)sessionControllerDidCancel:(OSKSessionController *)controller {
+    [self.activitySheetViewController sessionControllerDidCancelForActivity:controller.activity];
     [self.sessionControllers removeObjectForKey:controller.session.sessionIdentifier];
     
     /*

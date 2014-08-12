@@ -286,9 +286,11 @@
 
 - (void)handlePublishingStepForActivity:(OSKActivity *)activity {
     OSKPublishingMethod method = [activity.class publishingMethod];
-    if (method == OSKPublishingMethod_None || method == OSKPublishingMethod_URLScheme) {
-        [self dismissViewControllers];
-        [self handlePerformStepForActivity:activity];
+    if ((method == OSKPublishingMethod_None || method == OSKPublishingMethod_URLScheme)) {
+        if ([activity isReadyToPerform]) {
+            [self dismissViewControllers];
+            [self handlePerformStepForActivity:activity];
+        }
     } else {
         [self showPublishingViewControllerForActivity:activity];
     }
@@ -330,6 +332,10 @@
 }
 
 - (void)dismissViewControllers {
+    [self dismissViewControllersWithCompletion:nil];
+}
+
+- (void)dismissViewControllersWithCompletion:(void (^)(void))completion {
     NSAssert(NO, @"Subclasses must override dismissAllViewControllers without calling super");
 }
 
@@ -405,8 +411,9 @@
 #pragma mark - Convenience
 
 - (void)cancel {
-    [self dismissViewControllers];
-    [self.delegate sessionControllerDidCancel:self];
+    [self dismissViewControllersWithCompletion:^{
+        [self.delegate sessionControllerDidCancel:self];
+    }];
 }
 
 @end

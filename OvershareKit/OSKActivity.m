@@ -157,6 +157,14 @@ NSString * const OSKActivityType_SDK_Pocket = @"OSKActivityType_SDK_Pocket";
     return nil;
 }
 
+- (void)prepareForDisposal {
+    // Optional cleanup operations
+}
+
+- (void)prepareForReuse {
+    // Optional reuse operations
+}
+
 @end
 
 

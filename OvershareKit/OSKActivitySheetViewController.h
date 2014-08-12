@@ -8,6 +8,7 @@
 
 @import UIKit;
 
+@class OSKActivity;
 @class OSKSession;
 @protocol OSKActivitySheetDelegate;
 
@@ -21,6 +22,9 @@
                usePopoverLayout:(BOOL)usePopoverLayout;
 
 - (CGFloat)visibleSheetHeightForCurrentLayout;
+
+// Called when an Activity publishing view controller is cancelled, so all the remaining activities can be prepared for reuse
+- (void)sessionControllerDidCancelForActivity:(OSKActivity *)activity;
 
 @end
 

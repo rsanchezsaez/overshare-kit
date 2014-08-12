@@ -58,6 +58,7 @@ willPresentSystemViewController:(UIViewController *)systemViewController;
 - (void)presentViewControllerAppropriately:(UIViewController *)viewController setAsNewRoot:(BOOL)isNewRoot;
 - (void)presentSystemViewControllerAppropriately:(UIViewController *)systemViewController;
 - (void)dismissViewControllers;
+- (void)dismissViewControllersWithCompletion:(void (^)(void))completion;
 
 @end
 

@@ -76,17 +76,26 @@
     }
 }
 
-- (void)dismissViewControllers {
+- (void)dismissViewControllersWithCompletion:(void (^)(void))completion {
     if (self.modalNavigationController) {
         __weak OSKSessionController_Phone *weakSelf = self;
         [self.modalNavigationController dismissViewControllerAnimated:YES completion:^{
             [weakSelf setModalNavigationController:nil];
+            if (completion && !weakSelf.systemViewController && !weakSelf.modalNavigationController)
+            {
+                completion();
+            }
         }];
     }
     if (self.systemViewController) {
         __weak OSKSessionController_Phone *weakSelf = self;
         [self.systemViewController dismissViewControllerAnimated:YES completion:^{
             [weakSelf setSystemViewController:nil];
+            if (completion && !weakSelf.systemViewController && !weakSelf.modalNavigationController)
+            {
+                completion();
+            }
+
         }];
     }
 }

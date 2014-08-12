@@ -368,6 +368,13 @@ static CGFloat OSKActivitySheetViewControllerCollectionViewHeight_ThreeRows_Pad 
 #pragma mark - Collection View Delegate
 
 - (void)activityCollection:(OSKActivityCollectionViewController *)viewController didSelectActivity:(OSKActivity *)activity {
+    for (OSKActivity *currentActivity in self.activities) {
+        if (currentActivity == activity) {
+            continue;
+        }
+        [currentActivity prepareForDisposal];
+    }
+
     [self.delegate activitySheet:self didSelectActivity:activity];
 }
 
@@ -379,6 +386,18 @@ static CGFloat OSKActivitySheetViewControllerCollectionViewHeight_ThreeRows_Pad 
     [self.pageControl setNumberOfPages:[self.collectionViewController numberOfPages]];
     [self setHidePageControl:(numberOfPages <= 1)];
 }
+
+#pragma mark - Additional methods
+
+- (void)sessionControllerDidCancelForActivity:(OSKActivity *)activity {
+    for (OSKActivity *currentActivity in self.activities) {
+        if (currentActivity == activity) {
+            continue;
+        }
+        [currentActivity prepareForReuse];
+    }
+}
+
 
 @end
 
