@@ -163,6 +163,11 @@ static NSInteger OSKTwitterActivity_FallbackShortURLEstimateHTTPS = 23;
         textLengthAdjustmentForTCOLinks += difference;
     }
 
+    NSUInteger imageURLsLength = 0;
+    for (UIImage __unused *image in ((OSKMicroblogPostContentItem *)self.contentItem).images) {
+        imageURLsLength += estimatedShortURLLength_http + 1;
+    }
+
     NSUInteger extraURLLength = 0;
     if ([contentItem.textURL rangeOfString:@"https://"].length != 0) {
         extraURLLength = estimatedShortURLLength_https;
@@ -174,7 +179,7 @@ static NSInteger OSKTwitterActivity_FallbackShortURLEstimateHTTPS = 23;
     extraURLLength += 1;
 
     NSInteger composedLength = [text osk_lengthAdjustingForComposedCharacters];
-    NSInteger estimatedLength = composedLength + textLengthAdjustmentForTCOLinks + extraURLLength;
+    NSInteger estimatedLength = composedLength + textLengthAdjustmentForTCOLinks + extraURLLength + imageURLsLength;
     NSInteger remainingCharacterCount = [self maximumCharacterCount] - estimatedLength;
     
     [self setRemainingCharacterCount:remainingCharacterCount];

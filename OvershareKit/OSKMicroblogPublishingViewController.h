@@ -11,4 +11,6 @@
 
 @interface OSKMicroblogPublishingViewController : UIViewController <OSKPublishingViewController>
 
+- (void)updateDoneButton;
+
 @end

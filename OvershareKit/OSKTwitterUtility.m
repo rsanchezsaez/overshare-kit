@@ -231,7 +231,7 @@ NSString * const OSKTwitterImageSizeLimitKey = @"photo_size_limit";
         NSData *imageData = nil;
         NSString *MIMEtype = nil;
         NSString *remoteFilename = nil;
-        if ([image respondsToSelector:@selector(isAnimatedGIF)] && image.isAnimatedGIF) {
+        if ([image.images count] >= 2) {
             imageData = [AnimatedGIFImageSerialization animatedGIFDataWithImage:image
                                                                                duration:1.0
                                                                               loopCount:1
