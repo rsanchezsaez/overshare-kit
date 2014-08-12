@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "OvershareKit"
-  s.version      = "1.3.2-oe"
+  s.version      = "1.3.3-oe"
   s.summary      = "A soup-to-nuts sharing library for iOS."
   s.homepage     = "https://github.com/overshare/overshare-kit"
   s.license      = { :type => 'MIT', :file => 'LICENSE'  }
