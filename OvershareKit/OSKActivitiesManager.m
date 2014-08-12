@@ -381,10 +381,10 @@ static NSString * OSKActivitiesManagerPersistentExclusionsKey = @"OSKActivitiesM
     if (facebook) { [activities addObject:facebook]; }
 
     OSKFacebookSDKActivity *facebookSDK = [self validActivityForType:[OSKFacebookSDKActivity activityType]
-                                                         class:[OSKFacebookSDKActivity class]
-                                                 excludedTypes:excludedActivityTypes
-                                             requireOperations:requireOperations
-                                                          item:item];
+                                                               class:[OSKFacebookSDKActivity class]
+                                                       excludedTypes:excludedActivityTypes
+                                                   requireOperations:requireOperations
+                                                                item:item];
     if (facebookSDK) { [activities addObject:facebookSDK]; }
 
     return activities;
@@ -716,7 +716,7 @@ static NSString * OSKActivitiesManagerPersistentExclusionsKey = @"OSKActivitiesM
     else {
         // THESE ARE DEVELOPMENT CREDENTIALS ONLY, TO MAKE DEMOING OVERSHARE SIMPLE FOR US.
         // YOUR APP SHOULD OBTAIN AND PROVIDE YOUR OWN CREDENTIALS BEFORE SHIPPING!!!
-        if ([activityType isEqualToString:OSKActivityType_iOS_Facebook]) {
+        if ([activityType isEqualToString:OSKActivityType_iOS_Facebook] || [activityType isEqualToString:OSKActivityType_iOS_FacebookSDK]) {
             appCredential = [[OSKApplicationCredential alloc]
                              initWithOvershareApplicationKey:OSKApplicationCredential_Facebook_Key
                              applicationSecret:nil

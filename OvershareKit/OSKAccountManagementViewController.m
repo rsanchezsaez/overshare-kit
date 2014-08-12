@@ -26,6 +26,7 @@
 #import "OSKDraftsActivity.h"
 #import "OSKEmailActivity.h"
 #import "OSKFacebookActivity.h"
+#import "OSKFacebookSDKActivity.h"
 #import "OSKInstapaperActivity.h"
 #import "OSKOmnifocusActivity.h"
 #import "OSKPinboardActivity.h"
@@ -170,6 +171,7 @@ static NSString * OSKAccountManagementHeaderViewIdentifier = @"OSKAccountManagem
     [defaultClasses addObject:[OSKPinboardActivity class]];
     [defaultClasses addObject:[OSKTwitterActivity class]];
     [defaultClasses addObject:[OSKFacebookActivity class]];
+    [defaultClasses addObject:[OSKFacebookSDKActivity class]];
     [defaultClasses addObject:[OSKGooglePlusActivity class]];
     [defaultClasses addObject:[OSKSinaWeiboActivity class]];
     [defaultClasses addObject:[OSKTencentWeiboActivity class]];

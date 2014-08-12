@@ -87,7 +87,7 @@ static NSString * OSKFacebookActivity_PreviousAudienceKey = @"OSKFacebookActivit
 }
 
 + (NSString *)activityName {
-    return @"Facebook";
+    return @"Facebook iOS";
 }
 
 + (UIImage *)iconForIdiom:(UIUserInterfaceIdiom)idiom {
