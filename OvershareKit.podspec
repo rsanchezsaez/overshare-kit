@@ -23,5 +23,5 @@ Pod::Spec.new do |s|
   s.dependency 'AnimatedGIFImageSerialization'
   s.dependency 'Facebook-iOS-SDK'
   s.dependency 'PocketAPI'
-  s.dependency 'TMTumblrSDK', '1.0.9-oe'
+  s.dependency 'TMTumblrSDK', '~> 1.0.10-oe'
 end
